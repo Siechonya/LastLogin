@@ -9,6 +9,7 @@
   DB.clues = LL.clues || {};
   DB.chains = LL.chains || {};
   DB.hints = LL.hints || [];
+  DB.timeline = LL.timeline || [];
   DB.deduction = LL.deduction || { questions: [] };
   DB.intro = LL.intro || { cards: [] };
   DB.ending = LL.ending || { epilogue: [], ranks: {} };

@@ -148,10 +148,13 @@
   Sys.init = function () {
     var btn = document.getElementById('start-btn');
     var menu = document.getElementById('start-menu');
+    var qn = document.getElementById('quick-note');
+    if (qn) qn.addEventListener('click', function () { Apps.notes.openRef('player-note'); });
     btn.addEventListener('click', function (e) { e.stopPropagation(); menu.classList.toggle('hidden'); });
     document.addEventListener('pointerdown', function (e) {
       if (!menu.classList.contains('hidden') && !e.target.closest('#start-menu') && !e.target.closest('#start-btn')) menu.classList.add('hidden');
     });
+    menu.querySelector('[data-testid=sm-replay]').addEventListener('click', function () { menu.classList.add('hidden'); Boot.replayIntro(); });
     menu.querySelector('[data-testid=sm-save]').addEventListener('click', function () { menu.classList.add('hidden'); Sys.openSave(); });
     menu.querySelector('[data-testid=sm-about]').addEventListener('click', function () { menu.classList.add('hidden'); Sys.about(); });
     menu.querySelector('[data-testid=sm-restart]').addEventListener('click', function () { menu.classList.add('hidden'); Sys.restart(); });
@@ -260,6 +263,11 @@
     }
   }
   Boot.showDesktop = showDesktop;
+
+  /* 随时重看开场材料（不重置进度） */
+  Boot.replayIntro = function () {
+    return UI.overlayCards(DB.intro.cards || [], { lastLabel: '回到桌面' });
+  };
 
   function bootAnim() {
     return new Promise(function (res) {

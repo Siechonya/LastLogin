@@ -4,6 +4,8 @@
   var win = null, curTab = 'board', expandedHint = null;
   var TABS = [
     { id: 'board', label: '线索板' },
+    { id: 'timeline', label: '时间线' },
+    { id: 'checklist', label: '清单' },
     { id: 'hints', label: '提示' },
     { id: 'deduction', label: '结案' },
     { id: 'about', label: '进度' }
@@ -59,6 +61,30 @@
           card.appendChild(UI.h('div', { class: 'csrc' },
             UI.h('span', { text: '来源：' + cl.source }),
             UI.h('button', { class: 'goto-btn', text: '查看来源', 'data-testid': 'goto-' + cid, on: { click: function () { gotoSource(cid); } } })));
+          /* 每条线索可挂自己的笔记 */
+          var noteKey = 'clue:' + cid;
+          var saved = State.data.userNotes[noteKey] || '';
+          var ta = UI.h('textarea', {
+            class: 'user-note', placeholder: '给这条线索写点你自己的批注…（自动保存）',
+            'data-testid': 'cluenote-' + cid,
+            style: { minHeight: '0', height: saved ? '74px' : '0', padding: saved ? '8px 12px' : '0 12px', border: '1px solid var(--line)', borderRadius: '8px', background: '#0a0f1c', marginTop: '8px', fontSize: '12.5px', transition: 'height .15s', overflow: 'auto' }
+          });
+          ta.value = saved;
+          ta.addEventListener('input', function () {
+            State.setUserNote(noteKey, ta.value);
+            ta.style.height = '74px'; ta.style.padding = '8px 12px';
+            toggle.textContent = saved || ta.value ? '收起笔记' : '＋ 我的笔记';
+          });
+          var toggle = UI.h('button', { class: 'goto-btn', style: { marginTop: '8px' }, text: saved ? '收起笔记' : '＋ 我的笔记', 'data-testid': 'cluenote-toggle-' + cid });
+          toggle.addEventListener('click', function () {
+            var open = ta.style.height !== '0px';
+            ta.style.height = open ? '0' : '74px';
+            ta.style.padding = open ? '0 12px' : '8px 12px';
+            toggle.textContent = open ? '＋ 我的笔记' : '收起笔记';
+            if (!open) ta.focus();
+          });
+          card.appendChild(ta);
+          card.appendChild(UI.h('div', {}, toggle));
         } else {
           card.appendChild(UI.h('div', { class: 'cs', text: '继续翻这台电脑。她一定留下了什么。' }));
         }
@@ -66,6 +92,111 @@
       });
       pane.appendChild(block);
     });
+  }
+
+  /* ---------- 时间线 ---------- */
+  function needMet(need) {
+    if (!need) return true;
+    if (need === 'ended') return !!State.data.ended;
+    if (need.indexOf('CL-') === 0) return State.hasClue(need);
+    return State.seen(need);
+  }
+  function openItem(id) {
+    if (!id) return;
+    if (id.indexOf('CL-') === 0) { gotoSource(id); return; }
+    if (id.indexOf('photo:') === 0) Apps.photos.open(id);
+    else if (id.indexOf('page:') === 0) Apps.browser.openPage(id);
+    else if (id.indexOf('file:') === 0) Apps.files.openFile(id);
+    else if (id.indexOf('log:') === 0) Apps.logs.openRef(id);
+    else if (id.indexOf('email:') === 0) Apps.mail.openMail(id);
+    else if (id.indexOf('note:') === 0) Apps.notes.openRef(id);
+  }
+
+  function renderTimeline(pane) {
+    var tl = DB.timeline || [];
+    var got = tl.filter(function (t) { return needMet(t.need); }).length;
+    pane.appendChild(UI.h('p', { style: { fontSize: '12.5px', color: 'var(--tx3)', marginBottom: '14px' }, text: '她这半年经历的事，会随你的探索逐条点亮（' + got + ' / ' + tl.length + '）。点一条已查明的，可以跳回证据出现的地方。没点亮的只给日期——剩下的你自己去翻。' }));
+    var line = UI.h('div', { style: { borderLeft: '2px solid var(--line2)', marginLeft: '6px', paddingLeft: '18px' } });
+    tl.forEach(function (t, i) {
+      var on = needMet(t.need);
+      var row = UI.h('div', { style: { marginBottom: '14px', opacity: on ? '1' : '.42' }, 'data-testid': 'tl-' + i });
+      row.appendChild(UI.h('div', { style: { fontFamily: 'var(--mono)', fontSize: '11.5px', color: on ? 'var(--amber)' : 'var(--tx3)' }, text: t.date + (on ? '' : ' · 尚未查明') }));
+      row.appendChild(UI.h('div', { style: { fontSize: '13.5px', color: on ? 'var(--tx)' : 'var(--tx3)', marginTop: '2px' }, text: on ? t.title : '？？？' }));
+      if (on) {
+        row.appendChild(UI.h('div', { style: { fontSize: '12.5px', color: 'var(--tx2)', marginTop: '3px', lineHeight: '1.7' }, text: t.detail }));
+        if (t.need && t.need !== 'ended') {
+          row.appendChild(UI.h('div', { style: { marginTop: '6px' } },
+            UI.h('button', { class: 'goto-btn', text: '跳回证据', 'data-testid': 'tl-goto-' + i, on: { click: function () { openItem(t.need); } } })));
+        }
+      }
+      line.appendChild(row);
+    });
+    pane.appendChild(line);
+  }
+
+  /* ---------- 清单 ---------- */
+  function renderChecklist(pane) {
+    var d = State.data;
+    pane.appendChild(UI.h('p', { style: { fontSize: '12.5px', color: 'var(--tx3)', marginBottom: '14px' }, text: '调查进度清单。勾上的不用再管，没勾的按「下一步」的提示去找。所有提示都不剧透。' }));
+
+    var items = [
+      ['登录她的电脑', d.loggedIn === true || State.lockSolved('L0')],
+      ['解锁「文档/工作/归档」', State.lockSolved('L1')],
+      ['解锁隐藏相簿「六月」', State.lockSolved('L2')],
+      ['结案：三个问题全部答对', State.deductionSolved()],
+      ['打开 starfall.zip', !!d.starfall.unlocked],
+      ['把证据发给苏晴', !!d.starfall.sent]
+    ];
+    var box = UI.h('div', { class: 'q-block' });
+    box.appendChild(UI.h('div', { class: 'q-prompt', text: '主线步骤' }));
+    items.forEach(function (it, i) {
+      box.appendChild(UI.h('div', { style: { display: 'flex', gap: '10px', alignItems: 'center', padding: '5px 4px', fontSize: '13px', color: it[1] ? 'var(--green)' : 'var(--tx2)' }, 'data-testid': 'ck-' + i },
+        UI.h('span', { style: { fontFamily: 'var(--mono)', width: '16px' }, text: it[1] ? '✓' : '·' }),
+        UI.h('span', { style: it[1] ? { textDecoration: 'line-through', opacity: '.75' } : {} , text: it[0] })));
+    });
+    pane.appendChild(box);
+
+    var cb = UI.h('div', { class: 'q-block' });
+    cb.appendChild(UI.h('div', { class: 'q-prompt', text: '线索收集' }));
+    ['work', 'personal', 'missing'].forEach(function (ck) {
+      var ids = Object.keys(DB.clues).filter(function (k) { return DB.clues[k].chain === ck; });
+      var got = ids.filter(function (k) { return State.hasClue(k); }).length;
+      var bar = UI.h('div', { style: { display: 'flex', gap: '10px', alignItems: 'center', padding: '5px 4px', fontSize: '13px' } },
+        UI.h('span', { style: { color: DB.chains[ck].color, width: '64px' }, text: DB.chains[ck].name }),
+        UI.h('span', { style: { fontFamily: 'var(--mono)', color: 'var(--tx2)' }, text: got + ' / ' + ids.length }));
+      var track = UI.h('div', { style: { flex: '1', height: '6px', background: 'rgba(255,255,255,.07)', borderRadius: '3px', overflow: 'hidden' } });
+      track.appendChild(UI.h('div', { style: { width: Math.round(got / ids.length * 100) + '%', height: '100%', background: DB.chains[ck].color, opacity: '.8' } }));
+      bar.appendChild(track);
+      cb.appendChild(bar);
+    });
+    pane.appendChild(cb);
+
+    /* 不剧透的下一步建议 */
+    var tips = [];
+    if (!State.lockSolved('L1')) tips.push('她的工作文档里有个上锁的「归档」文件夹。密码的来历，她写在了某篇日记里。');
+    else if (!State.hasClue('CL-W4')) tips.push('「归档」里有一段录音转写，值得收藏。');
+    if (!State.lockSolved('L2')) tips.push('相册里少了一个相簿。密码在你们的共同记忆里——问问「第一次」。');
+    else if (!State.hasClue('CL-M2')) tips.push('「六月」相簿里有一张截图，日期和「失踪」对不上。');
+    if (!State.deductionSolved()) {
+      var c = State.clueCount();
+      if (c < 9) tips.push('线索还不够。三条线都翻一翻：邮件的草稿箱、聊天的撤回痕迹、系统日志的深夜记录、回收站。');
+      tips.push('把三条线的线索并排看一遍，再去「结案」页提交你的推理。');
+    } else if (!d.starfall.unlocked) tips.push('下载目录里的 starfall.zip 现在认你的密码了——那颗星。');
+    else if (!d.starfall.sent) tips.push('信读完了吗？她在等一个决定。');
+    var tb = UI.h('div', { class: 'q-block' });
+    tb.appendChild(UI.h('div', { class: 'q-prompt', text: '下一步' }));
+    if (!tips.length) tips.push('都做完了。去「时间线」把她这半年拼完整，或重读那封信。');
+    tips.forEach(function (t) { tb.appendChild(UI.h('div', { style: { fontSize: '13px', color: 'var(--tx2)', padding: '4px 4px', lineHeight: '1.7' }, text: '→ ' + t })); });
+    pane.appendChild(tb);
+
+    /* 剧情回顾 */
+    var rb = UI.h('div', { class: 'q-block' });
+    rb.appendChild(UI.h('div', { class: 'q-prompt', text: '剧情回顾' }));
+    rb.appendChild(UI.h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap' } },
+      UI.h('button', { class: 'btn', text: '重看开场（妈妈的信/字条/便利贴）', 'data-testid': 'review-intro', on: { click: function () { Boot.replayIntro(); } } }),
+      State.data.starfall.unlocked ? UI.h('button', { class: 'btn', text: '重读给知秋的信', 'data-testid': 'review-letter', on: { click: function () { Ending.playLetter(); } } }) : null,
+      State.data.ended ? UI.h('button', { class: 'btn', text: '重看尾声', 'data-testid': 'review-epilogue', on: { click: function () { Ending.playEpilogue(true); } } }) : null));
+    pane.appendChild(rb);
   }
 
   /* ---------- 提示 ---------- */
@@ -227,6 +358,8 @@
     var pane = UI.h('div', { class: 'inv-pane', 'data-testid': 'inv-pane-' + curTab });
     root.appendChild(pane);
     if (curTab === 'board') renderBoard(pane);
+    else if (curTab === 'timeline') renderTimeline(pane);
+    else if (curTab === 'checklist') renderChecklist(pane);
     else if (curTab === 'hints') renderHints(pane);
     else if (curTab === 'deduction') renderDeduction(pane);
     else renderAbout(pane);

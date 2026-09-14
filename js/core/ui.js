@@ -241,9 +241,16 @@
         btnRow = UI.h('div', { class: 'ov-nav' });
         dots = UI.h('div', { class: 'ov-dots' });
         cards.forEach(function (_, i) { dots.appendChild(UI.h('i', { class: i === idx ? 'on' : '' })); });
+        var left = UI.h('div', { style: { display: 'flex', gap: '10px', alignItems: 'center' } });
+        if (idx > 0) {
+          var prev = UI.h('button', { class: 'btn', text: '‹ 上一张', 'data-testid': 'ov-prev' });
+          prev.addEventListener('click', function () { idx--; render(); });
+          left.appendChild(prev);
+        }
+        left.appendChild(dots);
         btn = UI.h('button', { class: 'btn primary', text: idx === cards.length - 1 ? (cfg.lastLabel || '继续') : '继续', 'data-testid': 'ov-next' });
         btn.addEventListener('click', next);
-        btnRow.appendChild(dots);
+        btnRow.appendChild(left);
         btnRow.appendChild(btn);
         card.appendChild(btnRow);
         ov.appendChild(card);

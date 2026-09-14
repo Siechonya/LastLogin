@@ -348,6 +348,23 @@ check(dateOf('photo:ph-threat-letter') >= '2026-06-07', '威胁信照片日期 =
 const recallMsgs = (chats.find(c => /陈屿/.test(c.name || '')) || { messages: [] }).messages.filter(m => m.type === 'recalled');
 check(recallMsgs.length >= 1, '陈屿会话存在撤回消息（CL-P5）');
 
+section('11. 剧情时间线（记忆支架）');
+const tl = LL.timeline || [];
+check(tl.length >= 18, '时间线条目 ' + tl.length + ' / 期望 ≥18');
+let badNeed = 0;
+tl.forEach(function (t, i) {
+  const n = t.need;
+  if (!n || n === 'ended') return;
+  if (n.indexOf('CL-') === 0) { if (!clues[n]) { bad('时间线[' + i + '] need 线索不存在: ' + n); badNeed++; } }
+  else if (!byId(n)) { bad('时间线[' + i + '] need 条目不存在: ' + n); badNeed++; }
+});
+check(badNeed === 0, '时间线 need 引用全部有效');
+let decOrder = 0;
+for (let i = 1; i < tl.length; i++) if (String(tl[i].date) < String(tl[i - 1].date)) { bad('时间线日期倒序: ' + tl[i - 1].date + ' → ' + tl[i].date); decOrder++; }
+check(decOrder === 0, '时间线日期升序');
+const needClues = tl.map(t => t.need).filter(n => n && n.indexOf('CL-') === 0);
+check(needClues.length >= 12, '时间线覆盖线索数 ' + needClues.length + ' / 期望 ≥12');
+
 /* ---------- 汇总 ---------- */
 console.log('\n' + C.d + '----------------------------------------' + C.x);
 if (fail === 0) console.log(C.g + '全部通过：' + pass + ' 项检查，' + warn + ' 项提醒。' + C.x);

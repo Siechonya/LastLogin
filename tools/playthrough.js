@@ -366,6 +366,57 @@ async function main() {
     await shot(page, 'r-after-reload');
   }, true);
 
+  await step('调查手册：时间线页点亮且可跳回证据', async () => {
+    await ev(() => { WM.all().forEach(w => WM.close(w)); });
+    await page.click(T('icon-investigate'));
+    await page.waitForSelector(T('win-investigate'), { visible: true });
+    await page.click(T('tab-timeline')); await sleep(400);
+    const lit = await ev(() => Array.from(document.querySelectorAll('[data-testid^="tl-"]')).filter(e => e.innerText.indexOf('尚未查明') < 0).length);
+    if (lit < 14) throw new Error('时间线点亮数 ' + lit + ' < 14');
+    await shot(page, 't-timeline');
+    await page.click(T('tl-goto-6')); await sleep(700);
+    const opened = await ev(() => !!WM.get('viewer:file:doc-report'));
+    if (!opened) throw new Error('时间线跳回证据失败');
+    await ev(() => { WM.all().forEach(w => WM.close(w)); });
+  });
+
+  await step('调查手册：清单页 + 开场可回退重读', async () => {
+    await page.click(T('icon-investigate')); await sleep(300);
+    await page.click(T('tab-checklist')); await sleep(400);
+    for (let i = 0; i < 6; i++) await page.waitForSelector(T('ck-' + i), { visible: true, timeout: 4000 });
+    const ck3 = await textOf(page, T('ck-3'));
+    if (!ck3 || ck3.indexOf('✓') < 0) throw new Error('清单未勾选结案项: ' + ck3);
+    await shot(page, 't-checklist');
+    await page.click(T('review-intro')); await sleep(700);
+    await page.waitForSelector(T('ov-card-0'), { visible: true });
+    await page.click(T('ov-next')); await sleep(300);
+    await page.waitForSelector(T('ov-card-1'), { visible: true });
+    await page.click(T('ov-prev')); await sleep(300);
+    await page.waitForSelector(T('ov-card-0'), { visible: true });
+    for (let i = 0; i < 4; i++) { await page.click(T('ov-next')); await sleep(260); }
+    await page.waitForFunction(() => document.getElementById('overlay').classList.contains('hidden'), { timeout: 6000 });
+  });
+
+  await step('笔记：任务栏便签 + 线索批注，刷新后保留', async () => {
+    await ev(() => { WM.all().forEach(w => WM.close(w)); });
+    await page.click(T('quick-note')); await sleep(700);
+    await page.waitForSelector(T('my-note'), { visible: true });
+    await page.click(T('my-note'));
+    await page.type(T('my-note'), '陈屿 5-28 用过她的电脑；票是 6-13 的。', { delay: 5 });
+    await sleep(600);
+    await page.click(T('icon-investigate')); await sleep(300);
+    await page.click(T('tab-board')); await sleep(400);
+    await page.click(T('cluenote-toggle-CL-W1')); await sleep(300);
+    await page.click(T('cluenote-CL-W1'));
+    await page.type(T('cluenote-CL-W1'), '92.4 vs 78.1', { delay: 5 });
+    await sleep(700);
+    await shot(page, 't-clue-note');
+    await page.reload({ waitUntil: 'load' }); await sleep(900);
+    const notes = await ev(() => ({ mine: (State.data.userNotes['player-note'] || ''), w1: (State.data.userNotes['clue:CL-W1'] || '') }));
+    if (notes.mine.indexOf('6-13') < 0) throw new Error('玩家便签未持久化');
+    if (notes.w1.indexOf('78.1') < 0) throw new Error('线索批注未持久化');
+  });
+
   /* ---------- D. 全量内容渲染扫描 ---------- */
   await step('全量内容渲染扫描（每个条目都打开一次）', async () => {
     const ids = await ev(() => {
