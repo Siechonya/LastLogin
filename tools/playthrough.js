@@ -138,6 +138,9 @@ async function main() {
     const txt = await ev(() => document.querySelector('[data-testid="pageview-page:court-1024"]').innerText);
     if (txt.indexOf('1024') < 0) throw new Error('法院页未出现案号 1024');
     await shot(page, 'e-court-1024');
+    await ev(() => Apps.browser.openPage('page:news-police-0614')); await sleep(450);
+    const ptxt = await ev(() => { const e = document.querySelector('[data-testid="pageview-page:news-police-0614"]'); return e ? e.innerText : ''; });
+    if (ptxt.indexOf('09时30分') < 0 && ptxt.indexOf('09:30') < 0) throw new Error('警方通报页未加载');
   });
 
   await step('文件：用 1024 解锁「归档」并收藏 CL-W4', async () => {
@@ -366,6 +369,35 @@ async function main() {
     await shot(page, 'r-after-reload');
   }, true);
 
+  await step('目的性系统：章节/关联发现/成就/目标芯片', async () => {
+    const st = await ev(() => ({
+      ch: State.data.chaptersDone.slice(),
+      ins: State.data.insights.length,
+      ach: State.data.ach.slice(),
+      chip: (document.getElementById('goal-chip') || {}).textContent
+    }));
+    ['ch1', 'ch2', 'ch3', 'ch4'].forEach(c => { if (st.ch.indexOf(c) < 0) throw new Error('章节未完成: ' + st.ch.join(',')); });
+    if (st.ins < 5) throw new Error('关联发现过少: ' + st.ins);
+    ['ach-first', 'ach-all', 'ach-truth', 'ach-send'].forEach(a => { if (st.ach.indexOf(a) < 0) throw new Error('缺成就 ' + a); });
+    if (!st.chip || st.chip.indexOf('17/17') < 0) throw new Error('目标芯片文本异常: ' + st.chip);
+    await page.click(T('icon-investigate')); await sleep(300);
+    await page.click(T('tab-goal')); await sleep(400);
+    await shot(page, 'u-goal');
+    await page.click(T('note-ch1')); await sleep(400);
+    const noteTxt = await ev(() => { const m = document.querySelector('.modal-bg .modal p'); return m ? m.innerText : ''; });
+    if (noteTxt.indexOf('92.4') < 0) throw new Error('章节笔记内容异常');
+    await ev(() => { const b = Array.from(document.querySelectorAll('.modal-bg .m-acts button')).pop(); if (b) b.click(); });
+    await sleep(300);
+    await page.click(T('tab-board')); await sleep(300);
+    const insCards = await ev(() => document.querySelectorAll('[data-testid^="ins-"]').length);
+    if (insCards < 5) throw new Error('线索板关联发现卡片数 ' + insCards);
+    await page.click(T('tab-about')); await sleep(300);
+    const achGot = await ev(() => Array.from(document.querySelectorAll('[data-testid^="ach-"]')).filter(e => e.className.indexOf('locked') < 0).length);
+    if (achGot < 8) throw new Error('成就墙点亮数 ' + achGot);
+    await shot(page, 'u-ach');
+    await ev(() => { WM.all().forEach(w => WM.close(w)); });
+  });
+
   await step('调查手册：时间线页点亮且可跳回证据', async () => {
     await ev(() => { WM.all().forEach(w => WM.close(w)); });
     await page.click(T('icon-investigate'));
@@ -382,7 +414,7 @@ async function main() {
 
   await step('调查手册：清单页 + 开场可回退重读', async () => {
     await page.click(T('icon-investigate')); await sleep(300);
-    await page.click(T('tab-checklist')); await sleep(400);
+    await page.click(T('tab-goal')); await sleep(400);
     for (let i = 0; i < 6; i++) await page.waitForSelector(T('ck-' + i), { visible: true, timeout: 4000 });
     const ck3 = await textOf(page, T('ck-3'));
     if (!ck3 || ck3.indexOf('✓') < 0) throw new Error('清单未勾选结案项: ' + ck3);

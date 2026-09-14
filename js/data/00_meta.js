@@ -101,6 +101,68 @@
     { date: '2026-10', title: '《最后一次登录》刊发', detail: '苏晴在再审窗口期发稿；周明远、何珊被立案。', need: 'ended' }
   ];
 
+  /* 章节目标：给玩家明确的目的性；objectives 的 need 语义见 Progress.needMet */
+  LL.chapters = [
+    { id: 'ch1', title: '第一章 · 官方说法',
+      goal: '先搞清楚「外面」怎么讲这件事，再找出第一处讲不通的地方。',
+      hint: '从 Arc 浏览器 → 网页快照里的警方通报开始；她的日历、和最后几天的聊天也值得先看。',
+      objectives: [
+        { id: 'c1o1', label: '读警方通报（Arc 浏览器 → 网页快照）', need: 'page:news-police-0614' },
+        { id: 'c1o2', label: '读苏晴被撤稿的报道', need: 'CL-W5' },
+        { id: 'c1o3', label: '找到第一处「数字对不上」的硬证据', need: 'CL-W1' } ],
+      note: '官方说她「争执后未归」。\n可我手里的数字对不上：对外 92.4%，原始日志 78.1%。有人改过东西，改得很小心。\n\n——她不是意外消失的。继续。' },
+    { id: 'ch2', title: '第二章 · 谁在说谎',
+      goal: '她最近的人里，有一个时间线对不上。找出是谁、靠什么被收买。',
+      hint: '系统日志的深夜记录、相册里锁着的「六月」、邮件草稿箱——三处各有一块拼图。',
+      objectives: [
+        { id: 'c2o1', label: '弄清 5-28 深夜谁用了她的电脑', need: 'CL-P4' },
+        { id: 'c2o2', label: '找到那部不该存在的手机', need: 'CL-P1' },
+        { id: 'c2o3', label: '找到钱的路径（凭条 / 质问草稿）', need: 'CL-P2' } ],
+      note: '5-28 坐在她书桌前的人、6-04 在阳台用第二部手机发消息的人、口袋里装着启帆数据三十万凭条的人——是同一个人。\n她最亲近的人。\n\n我知道谁在说谎了。' },
+    { id: 'ch3', title: '第三章 · 她去了哪',
+      goal: '如果「被害」的每一项证据都太整齐，那失踪就是她自己安排的。找出她去了哪里。',
+      hint: '把「六月」相簿里的三样东西和六月的搜索记录排在一起看；然后去结案页写下你的推理。',
+      objectives: [
+        { id: 'c3o1', label: '看穿「威胁信」', need: 'CL-M1' },
+        { id: 'c3o2', label: '看穿「江边争吵」', need: 'CL-M3' },
+        { id: 'c3o3', label: '看穿「失踪时间」', need: 'CL-M2' },
+        { id: 'c3o4', label: '在结案页提交正确推理', need: 'deduction' } ],
+      note: '威胁信是她自己拍的，争吵是她自己写的剧本，车票买在「失踪」之后。\n她没有被人带走——她把自己藏了起来，藏在我们约过的那个地方。' },
+    { id: 'ch4', title: '终章 · 她的委托',
+      goal: '打开 starfall.zip，读她留给你的信，替她完成最后一步。',
+      hint: '密码是你们第一次一起认出的那颗星。',
+      objectives: [
+        { id: 'c4o1', label: '打开 starfall.zip', need: 'unlocked' },
+        { id: 'c4o2', label: '把证据发给苏晴', need: 'sent' } ],
+      note: '' }
+  ];
+
+  /* 关联发现：线索组合触发，把「线索堆积」变成「推理推进」 */
+  LL.insights = [
+    { id: 'ins-data', need: ['CL-W1', 'CL-W3'], title: '数字不会说谎，人会', text: '对外 92.4%，原始 78.1%。改数字的人，就是最怕被查的人。' },
+    { id: 'ins-muzzle', need: ['CL-W4', 'CL-W2'], title: '堵嘴的顺序', text: '先约谈，再合规函：公司知道她在查，而且在一步步堵她的嘴。' },
+    { id: 'ins-ghost', need: ['CL-P4', 'CL-P5'], title: '对不上的时间', text: '她人在公司，家里却有人登录；深夜撤回消息的人在删自己的痕迹。两条时间线指向同一个「身边人」。' },
+    { id: 'ins-money', need: ['CL-P2', 'CL-P3'], title: '三十万的链条', text: '启帆数据是慧语的供应商。收钱的人、供货的人、打探她的人——在同一条链上。' },
+    { id: 'ins-stage', need: ['CL-M1', 'CL-M3'], title: '太整齐的被害', text: '威胁信是摆拍、争吵是剧本。「被害」的每一项证据都整齐得像排练过——因为确实排练过。' },
+    { id: 'ins-north', need: ['CL-M2', 'CL-M4'], title: '向西北', text: '车票向西北，搜索也向西北。她不是逃去没人认识的地方，是去了我们约过的地方。' }
+  ];
+
+  /* 成就：通关成就感 */
+  LL.achievements = [
+    { id: 'ach-first', title: '第一枚拼图', desc: '收藏第一枚线索' },
+    { id: 'ach-ghost', title: '幽灵访客', desc: '发现 5-28 深夜的异常登录' },
+    { id: 'ach-recall', title: '撤回的痕迹', desc: '注意到被撤回的消息' },
+    { id: 'ach-chain', title: '一线贯通', desc: '集齐任意一条线索链' },
+    { id: 'ach-all', title: '她的全部', desc: '集齐 17 枚线索' },
+    { id: 'ach-timeline', title: '时间侦探', desc: '点亮全部剧情时间线' },
+    { id: 'ach-scribe', title: '调查员笔记', desc: '写下自己的第一条笔记' },
+    { id: 'ach-truth', title: '结案', desc: '提交正确推理' },
+    { id: 'ach-clean', title: '不靠提示', desc: '零提示通关' },
+    { id: 'ach-perfect', title: '她选对了人', desc: '零提示且全线索通关' },
+    { id: 'ach-swift', title: '四十分钟', desc: '40 分钟内完成委托' },
+    { id: 'ach-send', title: '纸鹤飞的时候', desc: '把证据发给苏晴' }
+  ];
+
   /* 提示系统：每组 3 级，tier1/2 不得包含 spoilWords（验证器强制） */
   LL.hints = [
     { id: 'hint-L0', target: 'L0', label: '开机密码', spoilWords: ['0812', '英仙座'],

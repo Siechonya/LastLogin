@@ -250,8 +250,14 @@
     startClock();
     Search.rebuild();
     if (!State.storageOK) UI.toast('此浏览器禁用了本地存储：进度只保留在本次会话，请用「存档管理 → 导出存档」。', { type: 'sys', ms: 7000 });
+    if (globalThis.Progress) Progress.sync();
+    if (Apps.investigate && Apps.investigate.refreshChip) Apps.investigate.refreshChip();
     if (firstTime) {
       setTimeout(function () { UI.toast('上次登录：' + (DB.meta.lastLogin || '') + ' · 距今 91 天', { type: 'sys', ms: 5200 }); }, 700);
+      setTimeout(function () {
+        Apps.investigate.open('goal');
+        UI.toast('我给自己列了要查的事——就在这个「目标」页。先完成第一章。', { type: 'sys', ms: 7000 });
+      }, 1600);
       if (DB.intro.firstClue && !State.hasClue(DB.intro.firstClue)) {
         setTimeout(function () {
           if (State.addClue(DB.intro.firstClue)) {

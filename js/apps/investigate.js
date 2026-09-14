@@ -1,11 +1,11 @@
 /* apps/investigate.js — 调查手册：线索板 / 渐进提示 / 结案推理 / 进度 */
 (function () {
   var Apps = (globalThis.Apps = globalThis.Apps || {});
-  var win = null, curTab = 'board', expandedHint = null;
+  var win = null, curTab = 'goal', expandedHint = null;
   var TABS = [
+    { id: 'goal', label: '目标' },
     { id: 'board', label: '线索板' },
     { id: 'timeline', label: '时间线' },
-    { id: 'checklist', label: '清单' },
     { id: 'hints', label: '提示' },
     { id: 'deduction', label: '结案' },
     { id: 'about', label: '进度' }
@@ -39,8 +39,95 @@
     }
   }
 
+  /* ---------- 目标（章节） ---------- */
+  function readChapterNote(ch) {
+    UI.modal({
+      wide: true, title: ch.title + ' · 她写下的笔记',
+      bodyNode: UI.h('p', { style: { whiteSpace: 'pre-wrap', lineHeight: '1.9' }, text: ch.note || '（这一章她没有留下笔记。）' }),
+      actions: [{ label: '合上笔记' }]
+    });
+  }
+
+  function renderGoal(pane) {
+    var cs = DB.chapters || [];
+    var cur = null;
+    cs.forEach(function (ch) { if (!cur && State.data.chaptersDone.indexOf(ch.id) < 0) cur = ch; });
+    pane.appendChild(UI.h('p', { style: { fontSize: '12.5px', color: 'var(--tx3)', marginBottom: '14px' }, text: '调查按章推进。每章有一个明确目标；小目标会随你的探索自动勾上。章末她会在笔记里写下一段话——那是你这一步的报酬。' }));
+
+    if (cur) {
+      var box = UI.h('div', { class: 'q-block', style: { borderColor: 'rgba(232,180,90,.4)' }, 'data-testid': 'chapter-cur' });
+      box.appendChild(UI.h('div', { class: 'q-prompt', style: { color: 'var(--amber)' }, text: cur.title }));
+      box.appendChild(UI.h('div', { style: { fontSize: '13.5px', color: 'var(--tx)', lineHeight: '1.8', marginBottom: '8px' }, text: cur.goal }));
+      box.appendChild(UI.h('div', { style: { fontSize: '12.5px', color: 'var(--tx2)', lineHeight: '1.7', marginBottom: '10px' }, text: '从哪下手：' + cur.hint }));
+      (cur.objectives || []).forEach(function (o, i) {
+        var done = Progress.needMet(o.need);
+        box.appendChild(UI.h('div', { style: { display: 'flex', gap: '10px', alignItems: 'center', padding: '4px 4px', fontSize: '13px', color: done ? 'var(--green)' : 'var(--tx2)' }, 'data-testid': 'obj-' + o.id },
+          UI.h('span', { style: { fontFamily: 'var(--mono)', width: '16px' }, text: done ? '✓' : '·' }),
+          UI.h('span', { style: done ? { textDecoration: 'line-through', opacity: '.75' } : {}, text: o.label })));
+      });
+      var got = (cur.objectives || []).filter(function (o) { return Progress.needMet(o.need); }).length;
+      box.appendChild(UI.h('div', { style: { marginTop: '10px', fontSize: '11.5px', color: 'var(--tx3)', fontFamily: 'var(--mono)' }, text: '本章进度 ' + got + ' / ' + (cur.objectives || []).length }));
+      pane.appendChild(box);
+    } else {
+      pane.appendChild(UI.h('div', { class: 'q-block', style: { borderColor: 'rgba(121,209,164,.4)' } },
+        UI.h('div', { class: 'q-prompt', style: { color: 'var(--green)' }, text: '全部章节完成' }),
+        UI.h('div', { style: { fontSize: '13px', color: 'var(--tx2)' }, text: '你走完了她留的全部路。下面的笔记可以反复读。' })));
+    }
+
+    var doneList = cs.filter(function (ch) { return State.data.chaptersDone.indexOf(ch.id) >= 0 && ch.note; });
+    if (doneList.length) {
+      var nb = UI.h('div', { class: 'q-block' });
+      nb.appendChild(UI.h('div', { class: 'q-prompt', text: '她的笔记（章节报酬）' }));
+      var row = UI.h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap' } });
+      doneList.forEach(function (ch) {
+        row.appendChild(UI.h('button', { class: 'btn', text: ch.title.replace(/·\s*/, '· '), 'data-testid': 'note-' + ch.id, on: { click: function () { readChapterNote(ch); } } }));
+      });
+      nb.appendChild(row);
+      pane.appendChild(nb);
+    }
+
+    renderChecklist(pane);
+  }
+
+  /* 任务栏目标芯片 */
+  var chipWired = false;
+  function refreshChip() {
+    var chip = document.getElementById('goal-chip');
+    if (!chip) return;
+    if (!chipWired) {
+      chipWired = true;
+      chip.addEventListener('click', function () { Apps.investigate.open('goal'); });
+    }
+    var cur = null;
+    (DB.chapters || []).forEach(function (ch) { if (!cur && State.data.chaptersDone.indexOf(ch.id) < 0) cur = ch; });
+    var total = Object.keys(DB.clues).length;
+    if (cur) {
+      chip.textContent = cur.title.split('·')[0].trim() + ' · ' + State.clueCount() + '/' + total;
+      chip.classList.remove('done');
+    } else {
+      chip.textContent = '已完成 · ' + State.clueCount() + '/' + total;
+      chip.classList.add('done');
+    }
+  }
+
   /* ---------- 线索板 ---------- */
   function renderBoard(pane) {
+    var ins = (DB.insights || []).filter(function (x) { return State.data.insights.indexOf(x.id) >= 0; });
+    var ib = UI.h('div', { style: { marginBottom: '18px' } });
+    ib.appendChild(UI.h('div', { class: 'chain-head' },
+      UI.h('span', { class: 'chain-name', style: { color: 'var(--violet)' }, text: '关联发现' }),
+      UI.h('span', { class: 'chain-desc', text: '线索两两相碰时，你自己的推理' }),
+      UI.h('span', { class: 'chain-prog', text: ins.length + ' / ' + (DB.insights || []).length })));
+    if (!ins.length) {
+      ib.appendChild(UI.h('div', { class: 'clue-card locked' }, UI.h('div', { class: 'cs', text: '还没有。继续收藏线索——当两条相关的证据都到手时，这里会浮现你自己的结论。' })));
+    } else {
+      ins.forEach(function (x) {
+        ib.appendChild(UI.h('div', { class: 'clue-card', 'data-testid': 'ins-' + x.id },
+          UI.h('div', { class: 'ct', style: { color: 'var(--violet)' }, text: '✦ ' + x.title }),
+          UI.h('div', { class: 'cs', text: x.text })));
+      });
+    }
+    pane.appendChild(ib);
     pane.appendChild(UI.h('p', { style: { fontSize: '12.5px', color: 'var(--tx3)', marginBottom: '16px' }, text: '收藏的线索会自动归类到三条线上。点击「查看来源」可以回到证据出现的地方。' }));
     ['work', 'personal', 'missing'].forEach(function (ck) {
       var chain = DB.chains[ck];
@@ -300,6 +387,7 @@
       State.data.deduction.solved = true;
       State.data.deduction.lastWrong = {};
       State.save();
+      if (globalThis.Progress) Progress.sync();
       render();
       UI.modal({
         wide: true, title: '✓ ' + dq.successTitle,
@@ -337,6 +425,20 @@
     acts.appendChild(UI.h('button', { class: 'btn', text: '存档管理…', on: { click: function () { SystemUI.openSave(); } } }));
     acts.appendChild(UI.h('button', { class: 'btn', text: '导出存档', on: { click: function () { SystemUI.openSave(); } } }));
     pane.appendChild(acts);
+    var A = Progress.achState();
+    var ab = UI.h('div', { style: { marginTop: '20px' } });
+    ab.appendChild(UI.h('div', { class: 'chain-head' },
+      UI.h('span', { class: 'chain-name', style: { color: 'var(--amber)' }, text: '成就' }),
+      UI.h('span', { class: 'chain-prog', text: State.data.ach.length + ' / ' + (DB.achievements || []).length })));
+    var grid = UI.h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(210px,1fr))', gap: '10px' } });
+    (DB.achievements || []).forEach(function (a) {
+      var got = State.data.ach.indexOf(a.id) >= 0;
+      grid.appendChild(UI.h('div', { class: 'clue-card' + (got ? '' : ' locked'), style: { marginBottom: '0' }, 'data-testid': 'ach-' + a.id },
+        UI.h('div', { class: 'ct', style: { color: got ? 'var(--amber)' : 'var(--tx3)' }, text: (got ? '★ ' : '· ') + a.title }),
+        UI.h('div', { class: 'cs', style: { fontSize: '12px' }, text: a.desc })));
+    });
+    ab.appendChild(grid);
+    pane.appendChild(ab);
     pane.appendChild(UI.h('p', { style: { marginTop: '22px', fontSize: '11.5px', color: 'var(--tx3)', lineHeight: '1.8' }, text: '评价规则：S＝线索≥16 且提示≤2；A＝线索≥13 且提示≤5；B＝线索≥9；C＝其余。评价只影响结算文字，不影响通关。\n\n本游戏所有人物、公司、案件与网页均为虚构。' }));
   }
 
@@ -357,9 +459,9 @@
     root.appendChild(tabs);
     var pane = UI.h('div', { class: 'inv-pane', 'data-testid': 'inv-pane-' + curTab });
     root.appendChild(pane);
-    if (curTab === 'board') renderBoard(pane);
+    if (curTab === 'goal') renderGoal(pane);
+    else if (curTab === 'board') renderBoard(pane);
     else if (curTab === 'timeline') renderTimeline(pane);
-    else if (curTab === 'checklist') renderChecklist(pane);
     else if (curTab === 'hints') renderHints(pane);
     else if (curTab === 'deduction') renderDeduction(pane);
     else renderAbout(pane);
@@ -381,6 +483,7 @@
   Apps.investigate = {
     open: function (tab) { if (tab) curTab = tab; ensure(); },
     refresh: function () { if (win) render(); },
+    refreshChip: refreshChip,
     hintModal: hintModal,
     openHint: function (target) {
       expandedHint = (hintGroup(target) || {}).id || null;

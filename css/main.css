@@ -384,6 +384,10 @@ input,textarea{font-family:inherit; color:inherit;}
 .save-slot .acts{display:flex; gap:6px;}
 
 /* ============ 对话框 & toast ============ */
+.goal-chip{flex:none; padding:6px 13px; border-radius:14px; font-size:12px; letter-spacing:.02em;
+  color:var(--amber); background:rgba(232,180,90,.09); border:1px solid rgba(232,180,90,.45); white-space:nowrap; transition:.15s;}
+.goal-chip:hover{background:rgba(232,180,90,.2);}
+.goal-chip.done{color:var(--green); border-color:rgba(121,209,164,.5); background:rgba(121,209,164,.1);}
 .side-item svg,.hint-head svg,.chat-input svg{width:15px; height:15px; flex:none;}
 .modal-bg{position:fixed; inset:0; z-index:7000; background:rgba(4,6,12,.66); display:flex; align-items:center; justify-content:center; animation:fadeIn .18s ease;}
 @keyframes fadeIn{from{opacity:0;} to{opacity:1;}}

@@ -365,6 +365,32 @@ check(decOrder === 0, '时间线日期升序');
 const needClues = tl.map(t => t.need).filter(n => n && n.indexOf('CL-') === 0);
 check(needClues.length >= 12, '时间线覆盖线索数 ' + needClues.length + ' / 期望 ≥12');
 
+section('12. 目的性与奖励数据（章节/关联发现/成就）');
+const chaps = LL.chapters || [];
+check(chaps.length === 4, '章节数 ' + chaps.length + ' / 期望 4');
+let badObj = 0;
+chaps.forEach(function (ch, ci) {
+  (ch.objectives || []).forEach(function (o) {
+    const n = o.need;
+    if (n === 'deduction' || n === 'unlocked' || n === 'sent' || n === 'ended') return;
+    if (n.indexOf('CL-') === 0) { if (!clues[n]) { bad('章节' + ci + ' 目标 need 线索不存在: ' + n); badObj++; } }
+    else if (!byId(n)) { bad('章节' + ci + ' 目标 need 条目不存在: ' + n); badObj++; }
+  });
+  if (!ch.goal || !ch.hint) { bad('章节' + ci + ' 缺 goal/hint'); badObj++; }
+});
+check(badObj === 0, '章节目标 need 引用全部有效');
+const allNeeds = chaps.map(c => (c.objectives || []).map(o => o.need)).flat();
+check(allNeeds.indexOf('deduction') >= 0 && allNeeds.indexOf('sent') >= 0, '章节覆盖结案与发送两个关键推进');
+const inss = LL.insights || [];
+check(inss.length >= 6, '关联发现 ' + inss.length + ' / 期望 ≥6');
+let badIns = 0;
+inss.forEach(function (x) { (x.need || []).forEach(function (n) { if (!clues[n]) { bad('关联发现 ' + x.id + ' need 不存在: ' + n); badIns++; } }); });
+check(badIns === 0, '关联发现 need 全部为合法线索');
+const achs = LL.achievements || [];
+check(achs.length >= 10, '成就数 ' + achs.length + ' / 期望 ≥10');
+const achIds = achs.map(a => a.id);
+check(new Set(achIds).size === achIds.length, '成就 id 唯一');
+
 /* ---------- 汇总 ---------- */
 console.log('\n' + C.d + '----------------------------------------' + C.x);
 if (fail === 0) console.log(C.g + '全部通过：' + pass + ' 项检查，' + warn + ' 项提醒。' + C.x);

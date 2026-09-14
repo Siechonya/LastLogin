@@ -22,6 +22,9 @@
       ended: false,
       rank: null,
       userNotes: {},        // 玩家便签 id -> 文本
+      insights: [],         // 已触发的关联发现 id
+      chaptersDone: [],     // 已完成章节 id
+      ach: [],              // 已达成成就 id
       playStart: Date.now(),
       playMs: 0
     };
@@ -79,13 +82,14 @@
     if (!DB.clues[id]) return false;
     S.data.clues.push(id);
     S.save();
+    if (globalThis.Progress) Progress.sync();
     return true;
   };
   S.clueCount = function () { return S.data.clues.length; };
 
   /* ---- 锁 ---- */
   S.lockSolved = function (id) { return !!S.data.locks[id]; };
-  S.solveLock = function (id) { S.data.locks[id] = true; S.save(); };
+  S.solveLock = function (id) { S.data.locks[id] = true; S.save(); if (globalThis.Progress) Progress.sync(); };
 
   /* ---- 提示 ---- */
   S.hintTier = function (hid) { return S.data.hints[hid] || 0; };
@@ -104,7 +108,7 @@
   S.deductionSolved = function () { return !!S.data.deduction.solved; };
 
   /* ---- 便签 ---- */
-  S.setUserNote = function (id, text) { S.data.userNotes[id] = text; S.save(); };
+  S.setUserNote = function (id, text) { S.data.userNotes[id] = text; S.save(); if (globalThis.Progress) Progress.sync(); };
 
   /* ---- 评价 ---- */
   S.computeRank = function () {

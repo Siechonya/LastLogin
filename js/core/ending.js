@@ -59,6 +59,7 @@
             State.data.ended = true;
             State.data.rank = State.computeRank();
             State.save();
+            if (globalThis.Progress) Progress.sync();
             Ending.playEpilogue(false);
           }, 900);
         }
@@ -91,6 +92,10 @@
       UI.h('div', { class: 'stat-card' }, UI.h('div', { class: 'v', text: String(cur.hints) }), UI.h('div', { class: 'k', text: '提示使用' })),
       UI.h('div', { class: 'stat-card' }, UI.h('div', { class: 'v', text: UI.fmtMinutes(State.data.playMs) }), UI.h('div', { class: 'k', text: '游玩时长' }))
     ));
+    var achGot = (DB.achievements || []).filter(function (a) { return State.data.ach.indexOf(a.id) >= 0; });
+    card.appendChild(UI.h('div', { style: { marginTop: '16px', fontSize: '12px', color: 'var(--tx2)', lineHeight: '1.9', textAlign: 'left', whiteSpace: 'pre-wrap' },
+      text: '成就 ' + State.data.ach.length + '/' + (DB.achievements || []).length + '：' + (achGot.length ? achGot.map(function (a) { return a.title; }).join('、') : '（无）') +
+        '\n章节 ' + State.data.chaptersDone.length + '/' + (DB.chapters || []).length + ' · 关联发现 ' + State.data.insights.length + '/' + (DB.insights || []).length + ' · 时间线 ' + (DB.timeline || []).filter(function (t) { return Progress.needMet(t.need); }).length + '/' + (DB.timeline || []).length }));
     var nav = UI.h('div', { class: 'ov-nav', style: { justifyContent: 'center' } });
     nav.appendChild(UI.h('button', { class: 'btn', text: (E().freeRoam || '继续浏览'), 'data-testid': 'rank-freeroam', on: { click: function () { ov.classList.add('hidden'); ov.innerHTML = ''; } } }));
     nav.appendChild(UI.h('button', { class: 'btn primary', text: E().restart || '重新开始', 'data-testid': 'rank-restart', on: { click: function () { SystemUI.restart(); } } }));
