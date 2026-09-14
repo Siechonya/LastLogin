@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>SVG 资产预览</title>
+<style>
+  body{background:#0b1020;color:#dce3f0;font-family:"Microsoft YaHei",sans-serif;margin:0;padding:18px;}
+  h2{font-size:15px;color:#e8b45a;margin:18px 0 10px;letter-spacing:.1em;}
+  .grid{display:grid;grid-template-columns:repeat(3,420px);gap:14px;}
+  .cell{border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden;background:#05070d;}
+  .cell img{width:100%;display:block;}
+  .cell div{font-size:11px;padding:5px 8px;color:#9aa7c0;font-family:Consolas,monospace;}
+  .avas{display:grid;grid-template-columns:repeat(10,84px);gap:10px;}
+  .ava{text-align:center;}
+  .ava img{width:64px;height:64px;border-radius:50%;background:#0e1526;border:1px solid rgba(255,255,255,.15);}
+  .ava span{display:block;font-size:10px;color:#9aa7c0;margin-top:4px;font-family:Consolas,monospace;}
+</style></head><body>
+<h2>照片资产 assets/photos（15）</h2>
+<div class="grid" id="photos"></div>
+<h2>头像资产 assets/avatars（10）</h2>
+<div class="avas" id="avas"></div>
+<script>
+var PH=['ph-perseid-2019','ph-m31-2019','ph-club-2019','ph-chenyu-0402','ph-desk-0320','ph-wang-family-0422','ph-cat-0501','ph-river-0611','ph-note-mother','ph-chenyu-phone','ph-threat-letter','ph-ticket-12306','ph-receipt-qifan','ph-usb-starfall','ph-postcard-lenghu'];
+var AV=['ava-linwan','ava-chenyu','ava-suqing','ava-zhiqiu','ava-mom','ava-zhengnan','ava-zhou','ava-heshan','ava-work','ava-delivery'];
+var p=document.getElementById('photos');
+PH.forEach(function(n){var c=document.createElement('div');c.className='cell';c.innerHTML='<img src="../assets/photos/'+n+'.svg"><div>'+n+'.svg</div>';p.appendChild(c);});
+var a=document.getElementById('avas');
+AV.forEach(function(n){var c=document.createElement('div');c.className='ava';c.innerHTML='<img src="../assets/avatars/'+n+'.svg"><span>'+n.replace('ava-','')+'</span>';a.appendChild(c);});
+</script>
+</body></html>

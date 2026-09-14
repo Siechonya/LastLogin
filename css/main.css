@@ -384,6 +384,7 @@ input,textarea{font-family:inherit; color:inherit;}
 .save-slot .acts{display:flex; gap:6px;}
 
 /* ============ 对话框 & toast ============ */
+.side-item svg,.hint-head svg,.chat-input svg{width:15px; height:15px; flex:none;}
 .modal-bg{position:fixed; inset:0; z-index:7000; background:rgba(4,6,12,.66); display:flex; align-items:center; justify-content:center; animation:fadeIn .18s ease;}
 @keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
 .modal{width:420px; max-width:92vw; background:linear-gradient(180deg,var(--bg2),var(--bg1)); border:1px solid var(--line2); border-radius:14px;
