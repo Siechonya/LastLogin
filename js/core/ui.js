@@ -247,7 +247,8 @@
         btnRow.appendChild(btn);
         card.appendChild(btnRow);
         ov.appendChild(card);
-        btn.focus();
+        card.scrollTop = 0;
+        btn.focus({ preventScroll: true });
       }
       function next() {
         idx++;
