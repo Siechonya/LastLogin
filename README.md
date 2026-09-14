@@ -101,6 +101,8 @@ assets/avatars/            10 个 SVG 头像
 docs/STORY_BIBLE.md        故事圣经：真实事件时间线、反转与伏笔登记、密码表（剧透）
 docs/CONTENT_SPEC.md       数据 schema 与全部内容槽位清单
 docs/WALKTHROUGH.md        完整通关攻略（剧透）
+docs/WALKTHROUGH.pdf       攻略的打印版（A4 排版，含封面与剧透警告页）
+docs/WALKTHROUGH.html      攻略的网页版（与 PDF 同排版，可直接浏览器打开/打印）
 tools/serve.js             零依赖本地服务器
 tools/validate.js          内容一致性自动验证（日期/人名/密码/线索可达性/提示不泄底）
 tools/playthrough.js       浏览器自动化：完整通关 + 全量条目渲染扫描
@@ -117,6 +119,9 @@ node tools/smoke.js --file  # file:// 协议下的冒烟测试
 bash tools/check-all.sh     # 一键：验证 → http 通关 → file:// 冒烟
 node tools/wordcount.js     # 内容体量统计（约 2.9 万汉字 / 387 条目）
 node tools/svgshot.js       # 把 25 个 SVG 资产渲染成预览图供目检
+MD2PDF_HTML=1 node tools/md2pdf.js docs/WALKTHROUGH.md docs/WALKTHROUGH.pdf "最后一次登录 · 通关攻略"
+                            # 重新生成攻略 PDF（同时产出同名 HTML 网页版）
+node tools/persist-test.js  # 存档持久化测试：刷新/重开/槽位/导出（file:// 与 http 双协议）
 ```
 
 `tools/` 下的测试依赖 `puppeteer-core`（已在 `tools/package.json`，`cd tools && npm i` 安装），

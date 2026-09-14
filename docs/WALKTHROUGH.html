@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>最后一次登录 · 通关攻略</title>
+<style>
+  @page { size: A4; margin: 16mm 14mm 16mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 10.5pt; line-height: 1.75; color: #23272e; margin: 0; }
+  .cover { page-break-after: always; padding-top: 34mm; text-align: center; }
+  .cover .kicker { letter-spacing: .35em; color: #9a6b1f; font-size: 10pt; }
+  .cover h1 { font-size: 26pt; margin: 10mm 0 6mm; color: #171a20; letter-spacing: .06em; }
+  .cover .warn { display: inline-block; margin-top: 8mm; padding: 5mm 9mm; border: 1.2pt solid #b3402f; color: #b3402f; border-radius: 3mm; font-size: 11pt; line-height: 1.9; }
+  .cover .meta { margin-top: 14mm; color: #6b7280; font-size: 9.5pt; }
+  h1 { font-size: 17pt; color: #171a20; border-bottom: 1.6pt solid #d9a441; padding-bottom: 2mm; margin: 9mm 0 4mm; page-break-after: avoid; }
+  h2 { font-size: 13.5pt; color: #7a5410; margin: 7mm 0 3mm; page-break-after: avoid; }
+  h3 { font-size: 11.5pt; color: #374151; margin: 5mm 0 2mm; page-break-after: avoid; }
+  p { margin: 2.4mm 0; text-align: justify; }
+  ul, ol { margin: 2.4mm 0; padding-left: 7mm; }
+  li { margin: 1.2mm 0; }
+  code { font-family: Consolas, "JetBrains Mono", monospace; font-size: 9.5pt; background: #f3efe4; border: .4pt solid #e2d8bd; border-radius: 1.4mm; padding: .3mm 1.4mm; color: #7a5410; }
+  pre { background: #f7f5ef; border: .5pt solid #ddd5c0; border-radius: 2mm; padding: 3mm 4mm; font-family: Consolas, monospace; font-size: 9pt; line-height: 1.6; white-space: pre-wrap; page-break-inside: avoid; }
+  blockquote { margin: 3mm 0; padding: 2.5mm 5mm; border-left: 1.4pt solid #d9a441; background: #fbf7ec; color: #5b5344; border-radius: 0 2mm 2mm 0; }
+  table { border-collapse: collapse; width: 100%; margin: 3mm 0; font-size: 9.5pt; page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th { background: #f0e7d2; color: #5d4708; text-align: left; }
+  th, td { border: .5pt solid #cfc6ad; padding: 1.8mm 2.6mm; vertical-align: top; }
+  hr { border: none; border-top: .6pt solid #d8d2c2; margin: 6mm 0; }
+  strong { color: #171a20; }
+  a { color: #7a5410; text-decoration: none; }
+  .foot { margin-top: 10mm; color: #9ca3af; font-size: 8.5pt; text-align: center; }
+</style></head><body>
+<div class="cover">
+  <div class="kicker">THE LAST LOGIN · SPOILER GUIDE</div>
+  <h1>最后一次登录 · 通关攻略</h1>
+  <div class="warn">剧透警告<br>本文件包含全部真相、密码与答案。<br>未通关前请勿阅读。</div>
+  <div class="meta">《最后一次登录》单机叙事解谜游戏 · 生成日期 2026-09-14<br>仓库内源文件：docs/WALKTHROUGH.md</div>
+</div>
+<h1>通关攻略 WALKTHROUGH（完整剧透）</h1>
+<blockquote>⚠⚠ <strong>本文件包含《最后一次登录》的全部真相、密码与答案。</strong><br>如果你还没通关，现在关掉它。游戏里的提示系统足以带你走完全程。</blockquote>
+<hr>
+<h2>一、真相速览（30 秒版）</h2>
+<ol>
+<li>林晚发现公司把「慧眼」v2.3 的结节召回率从 <strong>78.1% 美化成 92.4%</strong>，而这背后是一条人命（王秀兰，2026-02-17 去世）。</li>
+<li>公司察觉后，通过供应商启帆数据收买了她欠债的男友 <strong>陈屿</strong> 做眼线；5-28 深夜他还用她的电脑拷过文件。</li>
+<li>林晚在 6-05 发现背叛，于是<strong>自导自演了失踪</strong>：伪造威胁信、布置江边现场、写好定时消息，6-13 坐车离开江城，藏身 <strong>青海冷湖</strong>。</li>
+<li>她把真正的证据打包成 <code>starfall.zip</code>，留在<strong>这台被警方扫描后判定「无价值」的旧电脑</strong>里，并留字条让妈妈把电脑交给玩家叶知秋。</li>
+<li>玩家要做的是：看懂这一切 → 结案 → 用「天津四」打开压缩包 → 读她的信 → 把证据发给记者苏晴。</li>
+</ol>
+<hr>
+<h2>二、密码表</h2>
+<table><thead><tr><th>锁</th><th>对象</th><th>密码</th><th>从哪推出来</th></tr></thead><tbody><tr><td>L0</td><td>开机登录</td><td><strong><code>0812</code></strong></td><td>开场便利贴「密码是流星雨最大的那晚」→ 相册 2019-08-12 英仙座流星雨（极大日 8 月 12 日）；星图笔记也写了</td></tr><tr><td>L1</td><td>文档/工作/<strong>归档</strong></td><td><strong><code>1024</code></strong></td><td>日记 0518：「归档密码用了那个案号——不能忘」→ Arc 浏览器 → 网页快照 → 裁判文书网：王秀兰案案号 <code>(2026)鄂01民初1024号</code></td></tr><tr><td>L2</td><td>相册隐藏相簿「<strong>六月</strong>」</td><td><strong><code>M31</code></strong></td><td>与叶知秋的聊天（4 月）：「还记得我们第一次用望远镜认出的星系吗」「M31，仙女座」；相册 2019-10 那张照片说明也写着</td></tr><tr><td>L3</td><td>下载/<strong>starfall.zip</strong></td><td><strong><code>天津四</code></strong>（或 <code>deneb</code>）</td><td>与叶知秋的聊天（6 月初）：「如果有一天我消失了，你就抬头找那颗星——我们第一次一起认出来的那颗」→ 知秋回「天津四」；相册 2019-08-12 照片说明、备忘录「给知秋的暗号」均确认</td></tr></tbody></table>
+<p><strong>注意</strong>：L3 受推理门控——三个问题没答对之前，压缩包打不开（会提示「给看得懂的人」）。</p>
+<hr>
+<h2>三、结案答案</h2>
+<table><thead><tr><th>问题</th><th>正确答案</th></tr></thead><tbody><tr><td>Q1 林晚失踪的真相是？</td><td><strong>C 她自导自演了失踪</strong></td></tr><tr><td>Q2 在她身边、隐瞒身份并向公司出卖她的人是谁？</td><td><strong>B 陈屿</strong></td></tr><tr><td>Q3 林晚现在最可能在哪里？</td><td><strong>D 青海冷湖</strong></td></tr></tbody></table>
+<p>答错会给出方向性反馈（例如选 Q1-A 会提醒你：被绑架的人做不出提前买票、写定时消息这些安排）。</p>
+<hr>
+<h2>四、完整通关路线</h2>
+<h3>最短路线（约 25 分钟）</h3>
+<ol>
+<li>读完开场四张卡片 → 锁屏输入 <code>0812</code>。</li>
+<li><strong>Arc 浏览器 → 网页快照 → 裁判文书网</strong>，看到案号 1024。</li>
+<li><strong>文件管理器 → 文档 → 工作 → 归档</strong>，输入 <code>1024</code>；打开《录音转写-0518》收藏 <strong>CL-W4</strong>。</li>
+<li><strong>相册 → 六月</strong>，输入 <code>M31</code>；收藏 <strong>CL-M1</strong>（威胁信 EXIF）、<strong>CL-M2</strong>（6-13 车票）、<strong>CL-P1</strong>（阳台偷拍）。</li>
+<li><strong>纸鹤 → 郑楠</strong>，收藏 <strong>CL-W3</strong>；<strong>纸鹤 → 陈屿</strong>，收藏 <strong>CL-P3</strong>（5-02 启帆）与 <strong>CL-P5</strong>（6-11 撤回）。</li>
+<li><strong>云邮 → 收件箱</strong>：何珊《合规提醒函》<strong>CL-W2</strong>、内网账号回收通知 <strong>CL-W6</strong>；<strong>草稿箱</strong>：给陈屿的质问 <strong>CL-P2</strong>。</li>
+<li><strong>系统日志</strong>：5-28 22:14 本地登录 <strong>CL-P4</strong>、6-12 02:15 计划任务 <strong>CL-M5</strong>。</li>
+<li><strong>备忘录</strong>：给陈屿的定时消息文案 <strong>CL-M3</strong>。</li>
+<li><strong>Arc 浏览器 → 历史记录</strong>：6-09「冷湖 9月 天气」条目 ☆ <strong>CL-M4</strong>。</li>
+<li><strong>文件管理器 → 文档/工作</strong>：《慧眼v2.3评估报告-发布版》<strong>CL-W1</strong>；<strong>网页快照 → 苏晴的撤稿报道</strong> <strong>CL-W5</strong>。</li>
+<li><strong>调查手册 → 结案</strong>：选 C / B / D → 提交 → 通关弹窗点「去打开 starfall.zip」。</li>
+<li>压缩包密码 <code>天津四</code> → 打开「给知秋的信」→ 读信 → <strong>「把证据发给苏晴」</strong> → 尾声 → 评价。</li>
+</ol>
+<p>（<strong>CL-M6</strong> 字条线索在开场自动收藏，无需操作。）</p>
+<h3>100% 路线补充</h3>
+<p>上面 12 步即可集齐 17/17。若想读完整故事，别错过：</p>
+<ul>
+<li><strong>回收站</strong>（文件管理器左侧）：《布置清单.txt》《威胁信-原稿.txt》《给陈屿的信-删.txt》《搜索记录截图说明.txt》——反转 2 的铁证与她最脆弱的部分。</li>
+<li><strong>日记 5 篇</strong>（文档/个人/日记）：3-29 → 4-25 → 5-18 → 6-05 → 6-10，心理线完整。</li>
+<li><strong>日历</strong>：打开「显示已删除事件」，能看到被删掉的 <strong>6-13「出差·敦煌」</strong>（系统日志 6-10 23:20 有删除记录）。</li>
+<li><strong>与叶知秋的聊天</strong>：你们三年的疏离、以及她最后那句「好久不见。等我消息。」</li>
+<li><strong>王建国那封求助邮件</strong>与林晚没敢回的草稿。</li>
+</ul>
+<hr>
+<h2>五、17 枚关键线索清单</h2>
+<table><thead><tr><th>id</th><th>链</th><th>位置</th><th>说明</th></tr></thead><tbody><tr><td>CL-W1</td><td>工作</td><td>文档/工作/慧眼v2.3评估报告-发布版.md（对照 评估日志片段-原始.txt）</td><td>92.4% vs 78.1%</td></tr><tr><td>CL-W2</td><td>工作</td><td>云邮 收件箱 · 何珊 5-28《合规提醒函》</td><td>法务腔的威胁</td></tr><tr><td>CL-W3</td><td>工作</td><td>纸鹤 · 郑楠 5-09</td><td>「看完删。别把我供出来，我房贷还有26年」</td></tr><tr><td>CL-W4</td><td>工作</td><td>文档/工作/归档/录音转写-0518.md（L1）</td><td>「数据要经得起看，不是经得起查」</td></tr><tr><td>CL-W5</td><td>工作</td><td>Arc → 网页快照 → 苏晴《AI误诊之后》</td><td>被撤稿的报道</td></tr><tr><td>CL-W6</td><td>工作</td><td>云邮 收件箱 · 内网通知 6-06</td><td>她还没离职，公司在回收账号</td></tr><tr><td>CL-P1</td><td>人际</td><td>相册 → 六月 → 6-04 阳台偷拍（L2）</td><td>陈屿的第二部手机</td></tr><tr><td>CL-P2</td><td>人际</td><td>云邮 草稿箱 · 给陈屿（未发送）</td><td>6-01 启帆数据现金支取凭条</td></tr><tr><td>CL-P3</td><td>人际</td><td>纸鹤 · 陈屿 5-02</td><td>启帆数据 = 慧语供应商</td></tr><tr><td>CL-P4</td><td>人际</td><td>系统日志 5-28 22:14（对照日历「加班 19:00–23:30」）</td><td>用她电脑的是别人</td></tr><tr><td>CL-P5</td><td>人际</td><td>纸鹤 · 陈屿 6-11 23:52 后的撤回</td><td>他在删自己的痕迹</td></tr><tr><td>CL-M1</td><td>失踪</td><td>相册 → 六月 → 威胁信照片 EXIF（L2）</td><td>定时自拍 3s、客厅、镜子与拖鞋</td></tr><tr><td>CL-M2</td><td>失踪</td><td>相册 → 六月 → 12306 候补订单（L2）</td><td>6-13 江城→兰州，晚于「失踪」</td></tr><tr><td>CL-M3</td><td>失踪</td><td>备忘录 · 给陈屿的定时消息文案（6-10）</td><td>「江边争执」是剧本</td></tr><tr><td>CL-M4</td><td>失踪</td><td>Arc → 历史记录 6-09「冷湖 9月 天气」</td><td>六月的搜索簇指向西北</td></tr><tr><td>CL-M5</td><td>失踪</td><td>系统日志 6-12 02:15 计划任务（+6-08 USB STARFALL）</td><td>她走后电脑仍在替她做事</td></tr><tr><td>CL-M6</td><td>失踪</td><td>开场自动收藏（相册 · 字条照片）</td><td>「把电脑交给知秋」不是遗言，是安排</td></tr></tbody></table>
+<hr>
+<h2>六、两次反转的伏笔自查表</h2>
+<h3>反转 1：陈屿是内鬼（伏笔 → 揭示）</h3>
+<table><thead><tr><th>伏笔</th><th>位置</th></tr></thead><tbody><tr><td>2024 年屿见科技倒闭欠债、2026-04 母亲手术缺 30 万</td><td>纸鹤 · 陈屿（4 月）</td></tr><tr><td>2025-12 入职启帆数据，「最近总对接慧语那边的项目」</td><td>纸鹤 · 陈屿 5-02（CL-P3）</td></tr><tr><td>5 月起频繁打探公司项目、工作日 21:00 后总「在加班」</td><td>纸鹤 · 陈屿（5 月）</td></tr><tr><td>突然宽裕：送贵耳机、说「奖金发了」</td><td>纸鹤 · 陈屿（5-20 前后）</td></tr><tr><td>5-28 22:14 本地键盘登录 + KINGSTON U 盘拷贝 37 个文件，而她在公司加班</td><td>系统日志 + 日历（CL-P4）</td></tr><tr><td>6-04 阳台偷拍：第二部手机</td><td>相册/六月（CL-P1）</td></tr><tr><td>6-01 启帆数据 ¥300,000「咨询服务费」凭条</td><td>相册/六月 + 草稿邮件（CL-P2）</td></tr><tr><td>6-11 深夜撤回两条消息</td><td>纸鹤 · 陈屿（CL-P5）</td></tr></tbody></table>
+<h3>反转 2：失踪是她自导自演（伏笔 → 揭示）</h3>
+<table><thead><tr><th>伏笔</th><th>位置</th></tr></thead><tbody><tr><td>字条「如果我联系不上，把电脑交给知秋」</td><td>开场 + 相册（CL-M6）+ 纸鹤 · 妈妈 6-08</td></tr><tr><td>威胁信照片 EXIF：定时自拍 3s、客厅、镜子里的拖鞋</td><td>相册/六月（CL-M1）</td></tr><tr><td>回收站《威胁信-原稿.txt》：她自己写的打印体文案</td><td>回收站</td></tr><tr><td>6-13 的候补车票（「失踪」是 6-12）</td><td>相册/六月（CL-M2）</td></tr><tr><td>6-10 写好 23:52 / 00:05 两条定时消息文案</td><td>备忘录（CL-M3）</td></tr><tr><td>回收站《布置清单.txt》：江边、手机、包、外套、22:00 拍照</td><td>回收站</td></tr><tr><td>六月搜索簇：监控盲区 / 长途汽车到西宁 / 敦煌租车 / 冷湖天气 / 失踪多久销案</td><td>Arc 历史（CL-M4）</td></tr><tr><td>6-08 USB「STARFALL」写入 1.2GB；6-12 02:15 自动执行 cleanup.bat</td><td>系统日志（CL-M5）</td></tr><tr><td>6-10 23:20 删除日历事件「出差·敦煌」</td><td>系统日志 + 日历（显示已删除）</td></tr><tr><td>6-09 给知秋：「好久不见。等我消息。」</td><td>纸鹤 · 叶知秋</td></tr><tr><td>日记 6-10：「该说再见了，但不是以他们以为的方式」</td><td>文档/个人/日记</td></tr></tbody></table>
+<hr>
+<h2>七、评价规则</h2>
+<table><thead><tr><th>评价</th><th>条件</th></tr></thead><tbody><tr><td><strong>S</strong> 她选对了人</td><td>线索 ≥16 且 提示使用 ≤2</td></tr><tr><td><strong>A</strong> 细心的朋友</td><td>线索 ≥13 且 提示使用 ≤5</td></tr><tr><td><strong>B</strong> 走到了真相</td><td>线索 ≥9</td></tr><tr><td><strong>C</strong> 真相与代价</td><td>其余</td></tr></tbody></table>
+<p>评价只影响结算文字，不影响通关。按「最短路线」走且不看提示 = S。</p>
+<hr>
+<h2>八、常见卡点</h2>
+<table><thead><tr><th>卡在哪</th><th>去哪看</th></tr></thead><tbody><tr><td>开机密码</td><td>开场便利贴 + 相册 2019-08-12 那张照片的说明（英仙座极大日）</td></tr><tr><td>归档文件夹密码</td><td>日记 0518 +（浏览器）网页快照里的裁判文书网页面</td></tr><tr><td>相册「六月」打不开</td><td>与叶知秋的聊天（4 月那条关于「第一次用望远镜」的对话）</td></tr><tr><td>starfall.zip 打不开</td><td>先在「调查手册 → 结案」提交正确推理；密码是你们第一次一起认出的星</td></tr><tr><td>不知道 Q2 选谁</td><td>把 CL-P1/P2/P3/P4/P5 五条并排看：能在她家里用她电脑的人只有一个</td></tr><tr><td>不知道 Q3 选哪</td><td>六月的浏览历史 + 6-13 车票方向 + 天文社的共同记忆</td></tr><tr><td>找不到某条线索</td><td>线索板上「？」卡片会告诉你它属于哪条线；Ctrl+K 搜关键词（如「召回率」「凭条」「定时」「冷湖」）</td></tr></tbody></table>
+<div class="foot">《最后一次登录》· 所有人物、公司、案件与网页均为虚构</div>
+</body></html>
