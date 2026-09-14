@@ -31,15 +31,15 @@
     <path d="M210 44 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l8 4 L590 496 l-12 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-6 4 z" fill="url(#thermal)"/>
     <rect x="210" y="40" width="380" height="460" fill="url(#thermal)" opacity="0"/>
     <g font-family="sans-serif" fill="#2e2e2c" letter-spacing="1">
-      <text x="400" y="106" font-size="24" text-anchor="middle">启帆数据服务有限公司</text>
-      <text x="400" y="156" font-size="30" text-anchor="middle">现金支取凭条</text>
+      <text x="400" y="106" font-size="24" fill="#2e2e2c" text-anchor="middle">启帆数据服务有限公司</text>
+      <text x="400" y="156" font-size="30" fill="#2e2e2c" text-anchor="middle">现金支取凭条</text>
       <path d="M262 172 H538" stroke="#2e2e2c" stroke-width="2"/>
       <path d="M262 177 H538" stroke="#2e2e2c" stroke-width="1"/>
-      <text x="248" y="226" font-size="22">日期：2026-06-01</text>
-      <text x="248" y="272" font-size="22">金额（大写）：叁拾万元整</text>
-      <text x="248" y="322" font-size="28">¥300,000.00</text>
-      <text x="248" y="372" font-size="22">备注：咨询服务费</text>
-      <text x="248" y="418" font-size="22">经办：何</text>
+      <text x="248" y="226" font-size="22" fill="#2e2e2c">日期：2026-06-01</text>
+      <text x="248" y="272" font-size="22" fill="#2e2e2c">金额（大写）：叁拾万元整</text>
+      <text x="248" y="322" font-size="28" fill="#2e2e2c">¥300,000.00</text>
+      <text x="248" y="372" font-size="22" fill="#2e2e2c">备注：咨询服务费</text>
+      <text x="248" y="418" font-size="22" fill="#2e2e2c">经办：何</text>
     </g>
     <rect x="242" y="298" width="220" height="34" fill="none" stroke="#2e2e2c" stroke-width="1.5" opacity="0.6"/>
     <g opacity="0.5" transform="rotate(-12 500 356)">

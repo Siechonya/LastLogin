@@ -56,8 +56,8 @@
     </g>
     <path d="M214 92 V458" stroke="#c98a8a" stroke-width="1.8" opacity="0.45"/>
     <g font-family="cursive" fill="#2c3a58" opacity="0.92">
-      <text x="238" y="248" font-size="46" transform="rotate(-1 238 248)">如果我联系不上，</text>
-      <text x="252" y="340" font-size="46" transform="rotate(0.6 252 340)">把电脑交给知秋。</text>
+      <text x="238" y="248" font-size="46" fill="#2c3a58" transform="rotate(-1 238 248)">如果我联系不上，</text>
+      <text x="252" y="340" font-size="46" fill="#2c3a58" transform="rotate(0.6 252 340)">把电脑交给知秋。</text>
     </g>
     <path d="M600 404 q22 -6 34 4" fill="none" stroke="#2c3a58" stroke-width="3" opacity="0.5"/>
     <rect x="150" y="84" width="510" height="382" fill="url(#warm)" opacity="0.5"/>

@@ -79,7 +79,7 @@
         b.appendChild(UI.h('span', { text: m.text || '' }));
       }
       b.appendChild(UI.h('div', { class: 'ts', text: String(m.ts || '').slice(5) }));
-      if (m.clue && m.type !== 'recalled') {
+      if (m.clue) {
         var tools = UI.h('div', { class: 'msg-tools' });
         var done = State.hasClue(m.clue);
         var tb = UI.h('button', { class: done ? 'done' : '', 'data-testid': 'clue-btn-' + m.clue, text: done ? '✓ 已收藏线索' : '☆ 收藏为线索' });

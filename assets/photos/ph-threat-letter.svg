@@ -54,10 +54,10 @@
     <rect x="188" y="48" width="370" height="452" fill="#d9dade"/>
     <rect x="188" y="48" width="370" height="452" fill="url(#lampLight)" opacity="0.6"/>
     <g font-family="sans-serif" fill="#1b2130">
-      <text x="230" y="146" font-size="30">林晚：</text>
-      <text x="230" y="226" font-size="26">停止你正在做的事。</text>
-      <text x="230" y="270" font-size="26">有些数字不属于你。</text>
-      <text x="230" y="348" font-size="26">聪明人知道什么时候停手。</text>
+      <text x="230" y="146" font-size="30" fill="#1b2130">林晚：</text>
+      <text x="230" y="226" font-size="26" fill="#1b2130">停止你正在做的事。</text>
+      <text x="230" y="270" font-size="26" fill="#1b2130">有些数字不属于你。</text>
+      <text x="230" y="348" font-size="26" fill="#1b2130">聪明人知道什么时候停手。</text>
     </g>
     <path d="M230 384 h120" stroke="#1b2130" stroke-width="1" opacity="0.25"/>
   </g>
