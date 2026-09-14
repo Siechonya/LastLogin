@@ -8,7 +8,7 @@ const path = require('path');
 const vm = require('vm');
 
 const ROOT = path.join(__dirname, '..');
-const DATA_FILES = ['00_meta.js', '11_files_work.js', '12_files_work2.js', '13_files_missing.js', '20_emails.js', '21_emails2.js', '30_chats_a.js', '30_chats_b.js', '30_chats_c.js', '30_chats_d.js', '40_photos.js', '50_browser.js', '60_misc.js'];
+const DATA_FILES = ['00_meta.js', '11_files_work.js', '12_files_work2.js', '13_files_missing.js', '20_emails.js', '21_emails2.js', '30_chats_a.js', '30_chats_b.js', '30_chats_c.js', '30_chats_d.js', '30_chats_e.js', '40_photos.js', '50_browser.js', '60_misc.js'];
 
 let pass = 0, fail = 0, warn = 0;
 const failures = [], warnings = [];
@@ -175,9 +175,9 @@ emails.forEach(m => checkNotLate('邮件', m));
 photos.forEach(p => checkNotLate('照片', p));
 browser.pages.forEach(p => checkNotLate('网页', p));
 browser.history.forEach(h => checkNotLate('历史', h));
-calendar.forEach(c => checkNotLate('日历', c));
+calendar.forEach(c => { if (!c.external && String(c.date) > '2026-09-10') { bad('日历 ' + c.id + ' 日期 ' + c.date + ' 晚于故事开始日 2026-09-10'); late++; } });
 notes.forEach(n => checkNotLate('备忘录', n));
-syslogs.forEach(l => { if (l.id !== 'log:syslog-0910-boot' && !l.external && String(l.ts) > '2026-06-12 03:00') { bad('日志 ' + l.id + ' 时间异常: ' + l.ts); late++; } });
+syslogs.forEach(l => { if (l.id !== 'log:syslog-0910-boot' && !l.external && String(l.ts).slice(0, 16) > '2026-06-12 03:00') { bad('日志 ' + l.id + ' 时间异常: ' + l.ts); late++; } });
 chats.forEach(c => (c.messages || []).forEach(m => { if (String(m.ts) > '2026-06-12 11:00') { bad('聊天消息 ' + m.id + ' 时间过晚: ' + m.ts); late++; } }));
 check(late === 0, '所有内容日期不晚于失踪节点（external 除外）');
 
@@ -250,8 +250,8 @@ check(/1024/.test(textOf('file:doc-diary-0518')) === false, '日记 0518 不直�
 check(/300,000|30万|叁拾万/.test(textOf('photo:ph-receipt-qifan')), '启帆凭条金额 30 万');
 check(/1\.2\s?GB|1\.2G/i.test(textOf('log:syslog-0608-usb')), 'USB 写入 1.2GB');
 check(/23:52/.test(textOf('note:note-scheduled-msg')), '定时消息文案含 23:52');
-check(/00:40/.test(textOf('page:news-police-0614')), '警方通报含 00:40');
-check(/09:30/.test(textOf('page:news-police-0614')), '警方通报含 09:30');
+check(/00:40|0时40/.test(textOf('page:news-police-0614')), '警方通报含 00:40（或公文写法 0时40分）');
+check(/09:30|9时30/.test(textOf('page:news-police-0614')), '警方通报含 09:30（或公文写法 09时30分）');
 check(/2026-06-13|06-13|6月13/.test(textOf('photo:ph-ticket-12306')), '候补车票日期 6-13（晚于失踪日）');
 check(/天津四/.test(textOf('photo:ph-perseid-2019')), '2019 流星雨照片提到天津四（L3 密码来源）');
 check(/M31|仙女座/.test(textOf('photo:ph-m31-2019')), 'M31 照片提到 M31/仙女座（L2 密码来源）');

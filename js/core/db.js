@@ -15,7 +15,7 @@
 
   DB.files = (LL.filesWork || []).concat(LL.filesWork2 || []).concat(LL.filesMissing || []);
   DB.emails = (LL.emails || []).concat(LL.emails2 || []);
-  DB.chats = (LL.chatsA || []).concat(LL.chatsB || []).concat(LL.chatsC || []).concat(LL.chatsD || []).concat(LL.chats || []);
+  DB.chats = (LL.chatsA || []).concat(LL.chatsB || []).concat(LL.chatsC || []).concat(LL.chatsD || []).concat(LL.chatsE || []).concat(LL.chats || []);
   DB.photos = LL.photos || [];
   DB.browser = LL.browser || { pages: [], history: [], bookmarks: [] };
   DB.calendar = LL.calendar || [];

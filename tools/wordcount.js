@@ -9,14 +9,14 @@ const ROOT = path.join(__dirname, '..');
 const ctx = { console, JSON, Date, Math, Object, Array, String, Number, RegExp, Promise };
 ctx.globalThis = ctx;
 vm.createContext(ctx);
-['00_meta.js', '11_files_work.js', '12_files_work2.js', '13_files_missing.js', '20_emails.js', '21_emails2.js', '30_chats_a.js', '30_chats_b.js', '30_chats_c.js', '30_chats_d.js', '40_photos.js', '50_browser.js', '60_misc.js'].forEach(f => {
+['00_meta.js', '11_files_work.js', '12_files_work2.js', '13_files_missing.js', '20_emails.js', '21_emails2.js', '30_chats_a.js', '30_chats_b.js', '30_chats_c.js', '30_chats_d.js', '30_chats_e.js', '40_photos.js', '50_browser.js', '60_misc.js'].forEach(f => {
   const p = path.join(ROOT, 'js', 'data', f);
   if (fs.existsSync(p)) vm.runInContext(fs.readFileSync(p, 'utf8'), ctx, { filename: f });
 });
 const LL = ctx.LL || {};
 LL.filesWork = (LL.filesWork || []).concat(LL.filesWork2 || []).concat(LL.filesMissing || []);
 LL.emails = (LL.emails || []).concat(LL.emails2 || []);
-LL.chats = (LL.chatsA || []).concat(LL.chatsB || []).concat(LL.chatsC || []).concat(LL.chatsD || []).concat(LL.chats || []);
+LL.chats = (LL.chatsA || []).concat(LL.chatsB || []).concat(LL.chatsC || []).concat(LL.chatsD || []).concat(LL.chatsE || []).concat(LL.chats || []);
 function cn(s) { return (String(s || '').match(/[\u4e00-\u9fff]/g) || []).length; }
 function sum(arr, f) { return arr.reduce((n, x) => n + cn(f(x)), 0); }
 
