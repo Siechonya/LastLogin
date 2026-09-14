@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 533">
+  <defs>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#efe8d8"/>
+      <stop offset="1" stop-color="#ddd2bc"/>
+    </linearGradient>
+    <linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#080c1a"/>
+      <stop offset="0.55" stop-color="#121b34"/>
+      <stop offset="0.85" stop-color="#242a44"/>
+      <stop offset="1" stop-color="#3b3148"/>
+    </linearGradient>
+    <linearGradient id="milky" gradientUnits="userSpaceOnUse" x1="60" y1="400" x2="740" y2="60">
+      <stop offset="0" stop-color="#8fa3cf" stop-opacity="0.05"/>
+      <stop offset="0.4" stop-color="#c9d4e8" stop-opacity="0.2"/>
+      <stop offset="0.7" stop-color="#e8d9c0" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#8fa3cf" stop-opacity="0.04"/>
+    </linearGradient>
+    <radialGradient id="neb1" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7a88b8" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#7a88b8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="neb2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e8d9c0" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#e8d9c0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.55" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.3"/>
+    </radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <clipPath id="img">
+      <rect x="22" y="22" width="756" height="428"/>
+    </clipPath>
+  </defs>
+  <rect width="800" height="533" fill="url(#cardBg)"/>
+  <rect x="22" y="22" width="756" height="428" fill="url(#nightSky)"/>
+  <g clip-path="url(#img)">
+    <g filter="url(#soft)">
+      <path d="M30 420 Q300 120 780 190 L780 90 Q320 40 10 330 z" fill="url(#milky)"/>
+      <ellipse cx="250" cy="230" rx="90" ry="50" fill="url(#neb1)"/>
+      <ellipse cx="540" cy="130" rx="110" ry="50" fill="url(#neb2)"/>
+      <path d="M60 380 Q320 130 770 165" fill="none" stroke="#05070d" stroke-width="16" opacity="0.28"/>
+    </g>
+    <g fill="#dfe6f2">
+      <circle cx="70" cy="360" r="1" opacity="0.6"/><circle cx="110" cy="320" r="1.3" opacity="0.8"/>
+      <circle cx="150" cy="290" r="1" opacity="0.6"/><circle cx="190" cy="255" r="1.4" opacity="0.9"/>
+      <circle cx="230" cy="230" r="1" opacity="0.7"/><circle cx="268" cy="200" r="1.2" opacity="0.8"/>
+      <circle cx="310" cy="175" r="1" opacity="0.6"/><circle cx="352" cy="150" r="1.5" opacity="0.9"/>
+      <circle cx="398" cy="132" r="1" opacity="0.7"/><circle cx="442" cy="118" r="1.3" opacity="0.8"/>
+      <circle cx="490" cy="106" r="1" opacity="0.6"/><circle cx="540" cy="98" r="1.4" opacity="0.9"/>
+      <circle cx="592" cy="94" r="1" opacity="0.7"/><circle cx="644" cy="96" r="1.2" opacity="0.8"/>
+      <circle cx="696" cy="104" r="1" opacity="0.6"/><circle cx="742" cy="120" r="1.3" opacity="0.8"/>
+      <circle cx="90" cy="120" r="1.1" opacity="0.6"/><circle cx="180" cy="70" r="1.3" opacity="0.8"/>
+      <circle cx="300" cy="60" r="1" opacity="0.5"/><circle cx="480" cy="52" r="1.2" opacity="0.7"/>
+      <circle cx="620" cy="60" r="1" opacity="0.5"/><circle cx="720" cy="180" r="1.1" opacity="0.6"/>
+      <circle cx="140" cy="190" r="1" opacity="0.5"/><circle cx="260" cy="120" r="1" opacity="0.5"/>
+      <circle cx="400" cy="220" r="1" opacity="0.5"/><circle cx="560" cy="180" r="1.1" opacity="0.6"/>
+      <circle cx="660" cy="240" r="1" opacity="0.4"/><circle cx="60" cy="250" r="1" opacity="0.4"/>
+      <circle cx="340" cy="270" r="1" opacity="0.4"/><circle cx="220" cy="330" r="1" opacity="0.4"/>
+    </g>
+    <g fill="#fff2d8">
+      <circle cx="190" cy="255" r="2"/><circle cx="352" cy="150" r="2.2"/><circle cx="540" cy="98" r="2"/>
+      <g opacity="0.5">
+        <path d="M352 142 v16 M344 150 h16" stroke="#fff2d8" stroke-width="1"/>
+        <path d="M540 91 v14 M533 98 h14" stroke="#fff2d8" stroke-width="1"/>
+      </g>
+    </g>
+    <path d="M22 372 Q150 350 280 364 Q420 378 560 356 Q680 342 778 360 L778 392 L22 392 z" fill="#080a12"/>
+    <g fill="#0c1018">
+      <rect x="182" y="342" width="52" height="16"/>
+      <path d="M182 344 a26 24 0 0 1 52 0 z"/>
+      <rect x="206" y="320" width="4" height="26"/>
+      <rect x="254" y="350" width="40" height="12"/>
+      <path d="M254 352 a20 17 0 0 1 40 0 z"/>
+      <rect x="316" y="352" width="66" height="14"/>
+      <rect x="150" y="352" width="24" height="10"/>
+    </g>
+    <g fill="#e8b45a" opacity="0.75">
+      <circle cx="208" cy="338" r="2"/>
+      <rect x="326" y="356" width="4" height="4"/><rect x="340" y="356" width="4" height="4"/>
+      <rect x="354" y="356" width="4" height="4"/><rect x="158" y="355" width="4" height="4"/>
+    </g>
+    <path d="M430 366 V340" stroke="#0c1018" stroke-width="3"/>
+    <rect x="0" y="390" width="800" height="60" fill="#0a0c13"/>
+    <g fill="#161b28" opacity="0.9">
+      <ellipse cx="80" cy="416" rx="16" ry="6"/><ellipse cx="150" cy="436" rx="11" ry="4"/>
+      <ellipse cx="240" cy="410" rx="13" ry="5"/><ellipse cx="330" cy="430" rx="18" ry="6"/>
+      <ellipse cx="430" cy="412" rx="10" ry="4"/><ellipse cx="520" cy="434" rx="15" ry="5"/>
+      <ellipse cx="610" cy="410" rx="12" ry="5"/><ellipse cx="700" cy="428" rx="17" ry="6"/>
+      <ellipse cx="760" cy="408" rx="10" ry="4"/><ellipse cx="40" cy="440" rx="13" ry="5"/>
+      <ellipse cx="190" cy="446" rx="9" ry="3.5"/><ellipse cx="470" cy="444" rx="12" ry="4"/>
+      <ellipse cx="660" cy="446" rx="9" ry="3.5"/>
+    </g>
+    <g fill="#232a3c" opacity="0.5">
+      <ellipse cx="84" cy="414" rx="8" ry="2.6"/><ellipse cx="334" cy="428" rx="9" ry="2.6"/>
+      <ellipse cx="524" cy="432" rx="7" ry="2.4"/><ellipse cx="704" cy="426" rx="8" ry="2.6"/>
+    </g>
+  </g>
+  <rect x="22" y="22" width="756" height="428" fill="none" stroke="#b9ad94" stroke-width="2"/>
+  <g transform="rotate(2 700 84)">
+    <rect x="668" y="40" width="64" height="80" fill="#b96a4a"/>
+    <rect x="668" y="40" width="64" height="80" fill="none" stroke="#efe8d8" stroke-width="3" stroke-dasharray="3 5"/>
+    <rect x="676" y="48" width="48" height="64" fill="none" stroke="#efe8d8" stroke-width="1.5" opacity="0.8"/>
+    <path d="M700 62 l4 12 l12 4 l-12 4 l-4 12 l-4 -12 l-12 -4 l12 -4 z" fill="#efe8d8" opacity="0.9"/>
+    <path d="M682 100 h36" stroke="#efe8d8" stroke-width="2" opacity="0.6"/>
+  </g>
+  <g opacity="0.4" transform="rotate(-8 620 96)">
+    <circle cx="620" cy="96" r="30" fill="none" stroke="#5a5f6e" stroke-width="2"/>
+    <path d="M596 96 q24 -8 48 0 M596 104 q24 -8 48 0" fill="none" stroke="#5a5f6e" stroke-width="1.5"/>
+  </g>
+  <g font-family="cursive">
+    <text x="52" y="502" font-size="26" fill="#5a4a3a">青海 · 冷湖</text>
+    <text x="52" y="524" font-size="18" fill="#8a7a62">这里的夜空没有一处是黑的</text>
+  </g>
+  <g fill="#8a7a62" opacity="0.7">
+    <rect x="620" y="508" width="130" height="2"/>
+    <rect x="620" y="518" width="90" height="2"/>
+  </g>
+  <rect width="800" height="533" fill="url(#vig)"/>
+  <rect width="800" height="533" filter="url(#grain)" opacity="0.07"/>
+</svg>

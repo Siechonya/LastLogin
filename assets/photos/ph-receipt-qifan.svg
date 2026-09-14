@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 533">
+  <defs>
+    <linearGradient id="deskBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#191720"/>
+      <stop offset="1" stop-color="#100e14"/>
+    </linearGradient>
+    <linearGradient id="thermal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#cfcec3"/>
+      <stop offset="0.15" stop-color="#d9d8ce"/>
+      <stop offset="0.85" stop-color="#d4d3c8"/>
+      <stop offset="1" stop-color="#c6c5ba"/>
+    </linearGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.45" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.6"/>
+    </radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="800" height="533" fill="url(#deskBg)"/>
+  <g stroke="#221e2a" stroke-width="2" opacity="0.6" fill="none">
+    <path d="M0 90 H800 M0 470 H800"/>
+  </g>
+  <rect x="216" y="46" width="380" height="460" fill="#05060a" opacity="0.55" filter="url(#shadow)" transform="rotate(-2.5 400 268)"/>
+  <g transform="rotate(-2.5 400 268)">
+    <path d="M210 44 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l16 8 l16 -8 l8 4 L590 496 l-12 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-16 8 l-16 -8 l-6 4 z" fill="url(#thermal)"/>
+    <rect x="210" y="40" width="380" height="460" fill="url(#thermal)" opacity="0"/>
+    <g font-family="sans-serif" fill="#2e2e2c" letter-spacing="1">
+      <text x="400" y="106" font-size="24" text-anchor="middle">启帆数据服务有限公司</text>
+      <text x="400" y="156" font-size="30" text-anchor="middle">现金支取凭条</text>
+      <path d="M262 172 H538" stroke="#2e2e2c" stroke-width="2"/>
+      <path d="M262 177 H538" stroke="#2e2e2c" stroke-width="1"/>
+      <text x="248" y="226" font-size="22">日期：2026-06-01</text>
+      <text x="248" y="272" font-size="22">金额（大写）：叁拾万元整</text>
+      <text x="248" y="322" font-size="28">¥300,000.00</text>
+      <text x="248" y="372" font-size="22">备注：咨询服务费</text>
+      <text x="248" y="418" font-size="22">经办：何</text>
+    </g>
+    <rect x="242" y="298" width="220" height="34" fill="none" stroke="#2e2e2c" stroke-width="1.5" opacity="0.6"/>
+    <g opacity="0.5" transform="rotate(-12 500 356)">
+      <circle cx="500" cy="356" r="38" fill="none" stroke="#a03a3a" stroke-width="3"/>
+      <circle cx="500" cy="356" r="26" fill="none" stroke="#a03a3a" stroke-width="1.5"/>
+      <path d="M500 338 l4 12 l12 0 l-10 8 l4 12 l-10 -8 l-10 8 l4 -12 l-10 -8 l12 0 z" fill="#a03a3a" opacity="0.8"/>
+    </g>
+    <g opacity="0.14">
+      <rect x="210" y="240" width="380" height="3" fill="#000000"/>
+      <rect x="210" y="243" width="380" height="8" fill="#ffffff" opacity="0.5"/>
+      <path d="M210 430 L590 416 L590 424 L210 440 z" fill="#000000" opacity="0.5"/>
+    </g>
+    <path d="M232 60 Q300 240 246 480" fill="none" stroke="#000000" stroke-width="1" opacity="0.06"/>
+  </g>
+  <rect width="800" height="533" fill="url(#vig)"/>
+  <rect width="800" height="533" filter="url(#grain)" opacity="0.1"/>
+</svg>

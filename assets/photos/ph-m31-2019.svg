@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 533">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0e1c"/>
+      <stop offset="0.6" stop-color="#111a30"/>
+      <stop offset="1" stop-color="#1d2438"/>
+    </linearGradient>
+    <radialGradient id="m31out" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#a9bade" stop-opacity="0.32"/>
+      <stop offset="0.7" stop-color="#8fa3cf" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#8fa3cf" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="m31mid" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#dfe6f2" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#b9c6e4" stop-opacity="0.08"/>
+    </radialGradient>
+    <radialGradient id="noteGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e8b45a" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#e8b45a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.72">
+      <stop offset="0.55" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <rect width="800" height="533" fill="url(#sky)"/>
+  <g fill="#dfe6f2">
+    <circle cx="70" cy="60" r="1.2" opacity="0.8"/><circle cx="150" cy="130" r="1" opacity="0.5"/>
+    <circle cx="230" cy="70" r="1.4" opacity="0.9"/><circle cx="310" cy="160" r="1" opacity="0.5"/>
+    <circle cx="390" cy="60" r="1.2" opacity="0.7"/><circle cx="450" cy="140" r="1" opacity="0.5"/>
+    <circle cx="520" cy="80" r="1.3" opacity="0.8"/><circle cx="700" cy="60" r="1.1" opacity="0.7"/>
+    <circle cx="760" cy="150" r="1.2" opacity="0.7"/><circle cx="110" cy="220" r="1" opacity="0.5"/>
+    <circle cx="260" cy="250" r="1.2" opacity="0.6"/><circle cx="420" cy="230" r="1" opacity="0.4"/>
+    <circle cx="560" cy="260" r="1.1" opacity="0.5"/><circle cx="680" cy="230" r="1" opacity="0.4"/>
+    <circle cx="40" cy="320" r="1" opacity="0.4"/><circle cx="350" cy="310" r="1" opacity="0.4"/>
+    <circle cx="620" cy="120" r="1" opacity="0.6"/><circle cx="480" cy="190" r="1" opacity="0.5"/>
+  </g>
+  <g transform="rotate(-28 600 142)">
+    <ellipse cx="600" cy="142" rx="78" ry="32" fill="url(#m31out)"/>
+    <ellipse cx="600" cy="142" rx="44" ry="18" fill="url(#m31mid)"/>
+    <ellipse cx="600" cy="142" rx="15" ry="6.5" fill="#f2e5c6" opacity="0.85"/>
+    <ellipse cx="600" cy="136" rx="54" ry="5" fill="#0b1020" opacity="0.35"/>
+  </g>
+  <circle cx="648" cy="108" r="3.4" fill="#cfd8ea" opacity="0.45" filter="url(#soft)"/>
+  <circle cx="648" cy="108" r="1.4" fill="#dfe6f2" opacity="0.7"/>
+  <rect x="0" y="440" width="800" height="93" fill="#070a12"/>
+  <rect x="0" y="434" width="800" height="7" fill="#0d1322"/>
+  <g fill="#05070d">
+    <path d="M243 300 L253 442 L245 442 L236 302 z"/>
+    <path d="M257 300 L316 442 L306 442 L251 304 z"/>
+    <path d="M248 302 L192 442 L201 442 L255 305 z"/>
+    <rect x="236" y="284" width="26" height="18" rx="3"/>
+    <path d="M246 292 L344 216 L362 238 L262 312 z"/>
+    <path d="M344 216 L356 206 L374 228 L362 238 z"/>
+    <path d="M246 292 L232 302 L240 316 L256 306 z"/>
+    <path d="M292 244 L318 224 L322 230 L296 250 z"/>
+  </g>
+  <g fill="#05070d">
+    <circle cx="566" cy="356" r="16"/>
+    <path d="M576 346 q10 2 12 12 q-8 -4 -14 -4 z"/>
+    <path d="M540 442 q2 -58 26 -58 q24 0 26 58 z"/>
+    <path d="M548 396 q-14 6 -18 16 l8 6 q6 -8 16 -12 z"/>
+  </g>
+  <circle cx="546" cy="410" r="30" fill="url(#noteGlow)"/>
+  <rect x="524" y="400" width="34" height="24" rx="2" fill="#e8d9b0" opacity="0.6" transform="rotate(-8 541 412)"/>
+  <g stroke="#6a5a3a" stroke-width="1" opacity="0.5" transform="rotate(-8 541 412)">
+    <path d="M529 407 h24 M529 413 h24 M529 419 h16"/>
+  </g>
+  <rect width="800" height="533" fill="url(#vig)"/>
+  <rect width="800" height="533" filter="url(#grain)" opacity="0.08"/>
+</svg>

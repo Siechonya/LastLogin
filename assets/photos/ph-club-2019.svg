@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 533">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101828"/>
+      <stop offset="0.65" stop-color="#1a2440"/>
+      <stop offset="1" stop-color="#232c48"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx="0.5" cy="0.28" r="0.55">
+      <stop offset="0" stop-color="#e8b45a" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#e8b45a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.72">
+      <stop offset="0.5" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.5"/>
+    </radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+  <rect width="800" height="533" fill="url(#bg)"/>
+  <rect width="800" height="533" fill="url(#lamp)"/>
+  <g fill="none" stroke="#313b58" stroke-width="2">
+    <path d="M-10 58 Q200 128 400 62 Q600 128 810 54"/>
+  </g>
+  <g>
+    <g fill="#e8b45a" opacity="0.16">
+      <circle cx="80" cy="86" r="8"/><circle cx="180" cy="102" r="8"/><circle cx="290" cy="96" r="8"/>
+      <circle cx="400" cy="62" r="8"/><circle cx="510" cy="98" r="8"/><circle cx="620" cy="104" r="8"/>
+      <circle cx="726" cy="82" r="8"/>
+    </g>
+    <g fill="#ffe3ab">
+      <circle cx="80" cy="86" r="3"/><circle cx="180" cy="102" r="3"/><circle cx="290" cy="96" r="3"/>
+      <circle cx="400" cy="62" r="3"/><circle cx="510" cy="98" r="3"/><circle cx="620" cy="104" r="3"/>
+      <circle cx="726" cy="82" r="3"/>
+    </g>
+  </g>
+  <g fill="#070b14">
+    <circle cx="128" cy="286" r="19"/>
+    <path d="M96 452 q4 -110 32 -110 q28 0 32 110 z"/>
+    <circle cx="216" cy="268" r="20"/>
+    <path d="M230 254 q14 8 10 30 q-6 -14 -18 -18 z"/>
+    <path d="M182 452 q4 -122 34 -122 q30 0 34 122 z"/>
+    <circle cx="304" cy="284" r="19"/>
+    <circle cx="304" cy="258" r="8"/>
+    <path d="M272 452 q4 -108 32 -108 q28 0 32 108 z"/>
+    <circle cx="392" cy="262" r="21"/>
+    <path d="M354 452 q4 -126 38 -126 q34 0 38 126 z"/>
+    <circle cx="480" cy="280" r="19"/>
+    <path d="M448 452 q4 -112 32 -112 q28 0 32 112 z"/>
+    <circle cx="566" cy="266" r="20"/>
+    <path d="M580 252 q14 8 10 32 q-6 -15 -18 -20 z"/>
+    <path d="M532 452 q4 -120 34 -120 q30 0 34 120 z"/>
+    <circle cx="654" cy="288" r="19"/>
+    <path d="M622 452 q4 -106 32 -106 q28 0 32 106 z"/>
+  </g>
+  <rect x="0" y="440" width="800" height="93" fill="#0a0f1c"/>
+  <g>
+    <rect x="128" y="392" width="544" height="82" rx="7" fill="#4a2430" stroke="#6e3a44" stroke-width="2"/>
+    <g filter="url(#soft)" fill="#e8d9b0" opacity="0.8">
+      <rect x="168" y="414" width="96" height="18" rx="9"/>
+      <rect x="284" y="414" width="132" height="18" rx="9"/>
+      <rect x="436" y="414" width="88" height="18" rx="9"/>
+      <rect x="544" y="414" width="72" height="18" rx="9"/>
+      <rect x="240" y="444" width="320" height="12" rx="6" opacity="0.6"/>
+    </g>
+    <circle cx="150" cy="433" r="7" fill="#e8b45a" opacity="0.55"/>
+    <circle cx="650" cy="433" r="7" fill="#e8b45a" opacity="0.55"/>
+  </g>
+  <rect width="800" height="533" fill="url(#vig)"/>
+  <rect width="800" height="533" filter="url(#grain)" opacity="0.09"/>
+</svg>

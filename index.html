@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>最后一次登录 · The Last Login</title>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- 开场/结局 覆盖层 -->
+  <div id="overlay" class="overlay hidden"></div>
+
+  <!-- 启动动画 -->
+  <div id="boot" class="boot hidden">
+    <div class="boot-logo" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="72" height="72"><path d="M32 2 L36 28 L62 32 L36 36 L32 62 L28 36 L2 32 L28 28 Z" fill="#e8b45a"/></svg>
+    </div>
+    <div class="boot-title">Aster OS</div>
+    <pre id="boot-lines" class="boot-lines"></pre>
+  </div>
+
+  <!-- 锁屏 -->
+  <div id="lock" class="lock hidden">
+    <div class="lock-time" id="lock-time">2026-09-10</div>
+    <div class="lock-card">
+      <img class="lock-avatar" src="assets/avatars/ava-linwan.svg" alt="林晚">
+      <div class="lock-user">林晚</div>
+      <form id="lock-form" autocomplete="off">
+        <input id="lock-pass" type="password" placeholder="密码" data-testid="lock-pass">
+        <button type="submit" class="btn" data-testid="lock-submit">进入</button>
+      </form>
+      <div id="lock-msg" class="lock-msg" role="alert"></div>
+      <button id="lock-hint" class="linkish" data-testid="lock-hint">忘记密码？</button>
+    </div>
+    <div class="lock-foot">距上次登录已过去 <span id="lock-days">91</span> 天 · 上次登录 <span id="lock-last">2026-06-11 23:47</span></div>
+  </div>
+
+  <!-- 桌面 -->
+  <div id="desktop" class="desktop hidden">
+    <canvas id="wallpaper"></canvas>
+    <div id="icons" class="icons"></div>
+    <div id="windows" class="windows"></div>
+
+    <div id="taskbar" class="taskbar">
+      <button id="start-btn" class="start-btn" data-testid="start-btn" title="系统菜单">
+        <svg viewBox="0 0 64 64" width="18" height="18"><path d="M32 2 L36 28 L62 32 L36 36 L32 62 L28 36 L2 32 L28 28 Z" fill="#e8b45a"/></svg>
+      </button>
+      <div id="task-buttons" class="task-buttons"></div>
+      <div class="task-right">
+        <div class="search-wrap">
+          <input id="global-search" type="text" placeholder="搜索这台电脑…（Ctrl+K）" data-testid="global-search" autocomplete="off">
+          <div id="search-results" class="search-results hidden"></div>
+        </div>
+        <div id="clock" class="clock">2026-09-10 <span id="clock-time">--:--</span></div>
+      </div>
+    </div>
+
+    <!-- 开始菜单 -->
+    <div id="start-menu" class="start-menu hidden">
+      <div class="sm-head">
+        <img src="assets/avatars/ava-linwan.svg" alt="">
+        <div><div class="sm-user">林晚</div><div class="sm-sub">linwan@yunmail.com</div></div>
+      </div>
+      <button class="sm-item" data-testid="sm-save">存档管理…</button>
+      <button class="sm-item" data-testid="sm-about">关于本机</button>
+      <button class="sm-item" data-testid="sm-restart">重新开始游戏</button>
+    </div>
+  </div>
+
+  <!-- 数据（内容 agent 产出；缺失时引擎自动容错） -->
+  <script src="js/data/00_meta.js"></script>
+  <script src="js/data/11_files_work.js"></script>
+  <script src="js/data/13_files_missing.js"></script>
+  <script src="js/data/20_emails.js"></script>
+  <script src="js/data/30_chats.js"></script>
+  <script src="js/data/40_photos.js"></script>
+  <script src="js/data/50_browser.js"></script>
+  <script src="js/data/60_misc.js"></script>
+
+  <!-- 引擎 -->
+  <script src="js/core/db.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/core/wm.js"></script>
+  <script src="js/core/search.js"></script>
+  <script src="js/core/boot.js"></script>
+  <script src="js/core/ending.js"></script>
+
+  <!-- 应用 -->
+  <script src="js/apps/files.js"></script>
+  <script src="js/apps/mail.js"></script>
+  <script src="js/apps/chat.js"></script>
+  <script src="js/apps/photos.js"></script>
+  <script src="js/apps/browser.js"></script>
+  <script src="js/apps/calendar.js"></script>
+  <script src="js/apps/logs.js"></script>
+  <script src="js/apps/notes.js"></script>
+  <script src="js/apps/investigate.js"></script>
+
+  <script src="js/core/main.js"></script>
+</body>
+</html>

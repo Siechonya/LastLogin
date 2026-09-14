@@ -1,0 +1,185 @@
+(function () {
+  var LL = (globalThis.LL = globalThis.LL || {});
+  LL.photos = [
+    {
+      id: 'photo:ph-perseid-2019',
+      title: '英仙座',
+      date: '2019-08-12 23:41',
+      album: 'default',
+      src: 'assets/photos/ph-perseid-2019.svg',
+      clue: null,
+      external: false,
+      exif: { device: 'iPhone 8', mode: '长曝光 30s', gps: null, note: '天台三人剪影，夜空数道流星轨迹' },
+      caption: '英仙座流星雨，8月12日极大。',
+      story: '那年英仙座流星雨8月12日极大，我和知秋、苏晴三个人拖着凉席爬上教学楼天台。苏晴一直念叨城市灯光太亮，最多看个十来颗，结果我们数出了三十多颗。快十一点的时候，我照着知秋的星图第一次认出天津四——夏季大三角顶点的那颗，安安静静地亮着。那晚谁也没许愿，光顾着说话，一直聊到天亮。现在回想，那是我认识得最熟的一片天空。'
+    },
+    {
+      id: 'photo:ph-m31-2019',
+      title: 'M31',
+      date: '2019-10-19 20:15',
+      album: 'default',
+      src: 'assets/photos/ph-m31-2019.svg',
+      clue: null,
+      external: false,
+      exif: { device: 'Canon EOS 600D（天文社）', mode: '直焦手动曝光 20s', gps: null, note: '目镜后一团淡青色雾斑，四周散点星光' },
+      caption: 'M31仙女座，社团旧望远镜里看到的。',
+      story: '第一次用望远镜认出的星系：M31仙女座。社团那台老折射镜，调焦旋钮涩得要用两只手拧，知秋帮我扶着镜筒，目镜里浮出那团淡淡的雾斑时，她比我还激动，马上在旁边掏出笔记本记时间和视宁度。社长说它离这里两百五十万光年，是肉眼能看到的最远的东西。那晚天台风很大，没人想先下去。这团模糊的小斑我记到现在，比任何一张天体照片都清楚——因为旁边有人在做笔记。'
+    },
+    {
+      id: 'photo:ph-club-2019',
+      title: '跨年合影',
+      date: '2019-12-31 18:02',
+      album: 'default',
+      src: 'assets/photos/ph-club-2019.svg',
+      clue: null,
+      external: false,
+      exif: { device: 'iPhone 7（社长的）', mode: '合影', gps: null, note: '活动室挤满人，前排摆着火锅和橘子' },
+      caption: '天文社跨年合影，大家喊的是「晴天」。',
+      story: '2019年12月31日，全社挤在活动室里跨年。有人带了火锅，有人拎了一整袋橘子，社长站在椅子上念下学期的观测排期，没人在听。知秋和苏晴把我拽到前排合影，苏晴手里还捏着半个橘子。快门按下去的时候大家喊的是「晴天」——天文社版的「新年快乐」。后来毕业、工作，群早就安静了，但这张照片我一直留着。照片里所有人都很年轻。'
+    },
+    {
+      id: 'photo:ph-chenyu-0402',
+      title: '樱花季',
+      date: '2026-04-02 15:20',
+      album: 'default',
+      src: 'assets/photos/ph-chenyu-0402.svg',
+      clue: null,
+      external: false,
+      exif: { device: 'iPhone 15（陈屿）', mode: '人像模式（自拍）', gps: null, note: '樱花道双人合照，花瓣正落下来' },
+      caption: '四月初的樱花，他拍的。',
+      story: '请了半天假去看樱花。陈屿非要拉着我拍合照，举着手机找角度，说要拍出海报感，结果前几张全是糊的。拍这张的时候风把花瓣吹下来一大阵，他愣了两秒，说这不是他安排的，是天意。我们在树下笑了很久。回去的路上他牵着我的手，说明年还来。好啊，明年。这张照片我一直留着——那时候的四月，天很晴。'
+    },
+    {
+      id: 'photo:ph-desk-0320',
+      title: '我的工位',
+      date: '2026-03-20 10:11',
+      album: 'default',
+      src: 'assets/photos/ph-desk-0320.svg',
+      clue: null,
+      external: false,
+      exif: { device: 'Xiaomi 13', mode: '默认', gps: null, note: '双屏工位，慧语工牌、胃药，屏幕角贴着猫的照片' },
+      caption: '工位：双屏、胃药和栗子。',
+      story: '周会前的上午拍的。左屏跑着评估脚本，右屏开着需求文档，工牌挂在显示器支架上，旁边是胃药——药师说饭前吃，我永远在饭后才想起来。屏幕角贴着栗子的照片，加班的时候就算她在「监工」。知秋说我这个工位看上去又苦行又烟火气，我挺喜欢的。代码能跑，猫在家，没什么大不了的。'
+    },
+    {
+      id: 'photo:ph-wang-family-0422',
+      title: '附件照片',
+      date: '2026-04-22 09:30',
+      album: 'default',
+      src: 'assets/photos/ph-wang-family-0422.svg',
+      clue: null,
+      external: false,
+      exif: { device: '未知（邮件附件）', mode: '转存', gps: null, note: '医院病床照，床头有保温杯和橘子' },
+      caption: '王建国邮件里附来的照片。',
+      story: '4月22日上午九点半，收到王建国的邮件。正文很长，附了这张照片：他母亲王秀兰，62岁，躺在病床上，还在对镜头笑，床头放着保温杯和一袋橘子。看完邮件我把照片存了下来，我盯着这张脸看了很久。她应该是那种很温和的人，笑起来先眯眼睛，病了也怕「麻烦别人」。系统给出一行「良性」，他们就信了良性。回信我写了删、删了写，最后只敢写得很短、很谨慎。'
+    },
+    {
+      id: 'photo:ph-cat-0501',
+      title: '栗子',
+      date: '2026-05-01 14:44',
+      album: 'default',
+      src: 'assets/photos/ph-cat-0501.svg',
+      clue: null,
+      external: false,
+      exif: { device: 'Xiaomi 13', mode: '默认', gps: null, note: '橘猫趴在笔记本键盘上，眼睛眯着' },
+      caption: '键盘上的栗子，今天第八次。',
+      story: '五一假期，想在家理点东西，栗子直接跳上键盘趴下了，理直气壮。这只橘猫霸占了我的桌面，赶下去三秒又回来，尾巴扫过空格键，咔哒咔哒响成一串。最后我放弃抵抗，隔着她打字，错别率飙升，效率为零，心情很好。妈妈视频过来看见她，说这猫又胖了，让我少喂零食。栗子假装没听见，我也替她假装没听见。'
+    },
+    {
+      id: 'photo:ph-river-0611',
+      title: '江边夜景',
+      date: '2026-06-11 22:03',
+      album: 'default',
+      src: 'assets/photos/ph-river-0611.svg',
+      clue: null,
+      external: false,
+      exif: { device: 'Xiaomi 13', mode: '夜景', gps: '30.5728,114.3012', note: '栈道灯与对岸灯火，江面倒影被风吹皱' },
+      caption: '晚上的江边公园。',
+      story: '加班晚归，没有直接回家，绕到了江边公园。栈道的灯刚亮，对岸一片一片的，江面的倒影被风吹皱了。平时都是白天路过这里，晚上还是第一次来，原来这么安静。站了一会儿，拍了一张。风很大。拍完这张，我就该走了。'
+    },
+    {
+      id: 'photo:ph-note-mother',
+      title: '字条',
+      date: '2026-09-08 16:20',
+      album: 'default',
+      src: 'assets/photos/ph-note-mother.svg',
+      clue: 'CL-M6',
+      external: true,
+      exif: { device: 'HUAWEI P40', mode: '默认', gps: null, note: '横格纸，圆珠笔手写字，拍摄角度略斜' },
+      caption: '妈妈拍的字条：把电脑交给知秋。',
+      story: '知秋：电脑今天下午寄出了，单号在信里。这张字条是我八月整理林晚的东西时发现的，压在键盘底下，纸角都压软了。上面就一行字：「如果我联系不上，把电脑交给知秋。」这孩子从来不说没根据的话，她既然写了，就一定有她的道理。东西你收好，替她看看这台电脑。——周慧兰，9月8日'
+    },
+    {
+      id: 'photo:ph-chenyu-phone',
+      title: '第二部手机',
+      date: '2026-06-04 21:37',
+      album: 'hidden06',
+      src: 'assets/photos/ph-chenyu-phone.svg',
+      clue: 'CL-P1',
+      external: false,
+      exif: { device: 'Xiaomi 13', mode: '静音快门/数码变焦', gps: null, note: '隔玻璃门拍摄，阳台上的人影，手机屏幕亮着聊天界面' },
+      caption: '21:37，阳台，他的第二部手机。',
+      story: '这已经是他这几天晚上第三次去阳台「接电话」了。那晚我起来倒水，看见他背对客厅靠在栏杆上，手指飞快，屏幕的光照亮他半张脸——那部手机我从没见过。我退回房间，关掉快门声，隔着玻璃门拍了这张。心跳得很重，怕他隔着门都听得见。我不知道他在给谁发消息，但我知道我必须把它留下来。后来再看这张照片，最让我难受的不是那部手机，而是那个关掉快门声的自己——动作那么熟练，那么冷静。'
+    },
+    {
+      id: 'photo:ph-threat-letter',
+      title: '威胁信',
+      date: '2026-06-07 22:10',
+      album: 'hidden06',
+      src: 'assets/photos/ph-threat-letter.svg',
+      clue: 'CL-M1',
+      external: false,
+      exif: { device: 'Xiaomi 13', mode: '定时自拍 3s', gps: null, note: '画面边缘：穿衣镜与拖鞋' },
+      caption: '书桌上那封「威胁信」。',
+      story: '信上写：「林晚：停止你正在做的事。有些数字不属于你。聪明人知道什么时候停手。」——挺像回事的吧。可最后那句是从6月1日那封匿名邮件里借来的，他们先说的，我只是把它打印出来，手机靠在笔筒上，定了3秒自拍。拍的时候我穿着拖鞋，笑场了两次，镜子里那个人像极了不会演戏的演员。知秋，你看到这张照片的时候，应该已经把一切都想明白了。'
+    },
+    {
+      id: 'photo:ph-ticket-12306',
+      title: '候补订单',
+      date: '2026-06-09 23:02',
+      album: 'hidden06',
+      src: 'assets/photos/ph-ticket-12306.svg',
+      clue: 'CL-M2',
+      external: false,
+      exif: { device: 'Xiaomi 13', mode: '截图', gps: null, note: '12306候补订单页：6-13 江城→兰州，乘车人 林晚，状态「候补中」，兑现概率78%' },
+      caption: '候补订单：6-13江城→兰州，乘车人林晚。',
+      story: '晚上十一点提交的候补订单：江城到兰州，6月13日，乘车人林晚。兑现概率78%。又是78。我盯着屏幕苦笑了一下，这个数字最近总在我生活里出现，一次比一次不相干。算了，能兑现就兑现，兑现不了再想别的办法。这趟车，我必须坐上。'
+    },
+    {
+      id: 'photo:ph-receipt-qifan',
+      title: '现金支取凭条',
+      date: '2026-06-05 23:40',
+      album: 'hidden06',
+      src: 'assets/photos/ph-receipt-qifan.svg',
+      clue: null,
+      external: false,
+      exif: { device: 'Xiaomi 13', mode: '文档翻拍', gps: null, note: '凭条：日期2026-06-01，金额¥300,000.00，备注「咨询服务费」，付款方「启帆数据服务有限公司」' },
+      caption: '他外套口袋里的那张现金支取凭条。',
+      story: '他的外套挂在门后。我挂衣服的时候，手指碰到口袋里一张折起来的纸。启帆数据的现金支取凭条：6月1日，三十万，备注「咨询服务费」。我在玄关的黑暗里站了很久，然后走进卫生间，关上门，没开灯，借着屏幕的光翻拍了这张。再把凭条放回口袋，折痕对齐。他在卧室睡得很沉。整个过程，不到五分钟。'
+    },
+    {
+      id: 'photo:ph-usb-starfall',
+      title: 'STARFALL',
+      date: '2026-06-08 21:55',
+      album: 'hidden06',
+      src: 'assets/photos/ph-usb-starfall.svg',
+      clue: null,
+      external: false,
+      exif: { device: 'Xiaomi 13', mode: '暗光', gps: null, note: '桌上移动硬盘（卷标STARFALL），笔记本屏幕微光，拷贝进度条1.2GB' },
+      caption: '深夜的桌面：移动硬盘和进度条。',
+      story: '移动硬盘下午签收了，卷标改成STARFALL。starfall.zip，1.2GB，里面是日志、转写、对比表，还有给知秋的信。进度条一格一格地走，我反而平静下来，比这一个月里任何一个晚上都平静。拷贝完成，安全弹出，把硬盘包好——像把另一个自己打包寄存。台灯关着，只剩屏幕的微光。拍下这张，留给以后的我。或者，留给会看到它的人。'
+    },
+    {
+      id: 'photo:ph-postcard-lenghu',
+      title: '冷湖明信片',
+      date: '2027-09-20 12:00',
+      album: 'default',
+      src: 'assets/photos/ph-postcard-lenghu.svg',
+      clue: null,
+      external: true,
+      exif: { device: '平板扫描（Epson V39）', mode: '600dpi', gps: null, note: '正面：冷湖戈壁星空；背面：一行手写字与邮戳' },
+      caption: '冷湖寄来的明信片：天津四今年也很好。',
+      story: '明信片没有回信地址，邮戳是冷湖。正面是压满戈壁的星空，背面只有一行字：「天津四今年也很好。——晚」。你把它看了很多遍，又放回信封里。星星还在天上，这就够了。'
+    }
+  ];
+})();

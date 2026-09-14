@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 533">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0d16"/>
+      <stop offset="1" stop-color="#0e1220"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a2233" stop-opacity="0.5"/>
+      <stop offset="0.5" stop-color="#141b2a" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#0c111c" stop-opacity="0.5"/>
+    </linearGradient>
+    <radialGradient id="phoneGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#cfe0f0" stop-opacity="0.4"/>
+      <stop offset="0.5" stop-color="#9fb8d8" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#9fb8d8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.46" cy="0.48" r="0.62">
+      <stop offset="0.4" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="0.85" stop-color="#000000" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.8"/>
+    </radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="softFocus" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+  <rect width="800" height="533" fill="url(#night)"/>
+  <g filter="url(#softFocus)">
+    <rect x="60" y="30" width="680" height="503" fill="#0c101b"/>
+    <rect x="60" y="30" width="680" height="503" fill="url(#glass)"/>
+    <g fill="#06080e">
+      <circle cx="330" cy="182" r="27"/>
+      <path d="M306 168 q6 -22 26 -22 q20 0 26 20 q-10 -8 -26 -8 q-16 0 -26 10 z"/>
+      <path d="M352 176 l9 8 l-8 5 z"/>
+      <path d="M348 196 q8 6 8 14 l-14 6 q-6 -12 -14 -14 z"/>
+      <path d="M318 204 q-30 10 -38 40 L272 420 q-2 40 10 113 L392 533 q10 -80 8 -118 L392 300 q-6 -60 -34 -80 z"/>
+      <path d="M386 262 q24 16 26 40 l-14 12 q-10 -22 -26 -32 z"/>
+    </g>
+    <path d="M392 300 q22 8 30 24 l-10 20 q-14 -14 -30 -18 z" fill="#06080e"/>
+    <g transform="rotate(18 424 300)">
+      <rect x="410" y="272" width="26" height="50" rx="4" fill="#0a0d14"/>
+      <rect x="413" y="276" width="20" height="42" rx="2" fill="#cfe0f0" opacity="0.92"/>
+    </g>
+    <circle cx="424" cy="296" r="96" fill="url(#phoneGlow)"/>
+    <g fill="none" stroke="#cfe0f0" stroke-linecap="round">
+      <path d="M344 200 q10 8 6 16" stroke-width="2.2" opacity="0.5"/>
+      <path d="M352 190 l8 7" stroke-width="2" opacity="0.35"/>
+      <path d="M392 292 q14 6 20 14" stroke-width="2" opacity="0.3"/>
+    </g>
+  </g>
+  <g fill="#04060b">
+    <rect x="42" y="16" width="26" height="517" rx="4"/>
+    <rect x="732" y="16" width="26" height="517" rx="4"/>
+    <rect x="42" y="16" width="716" height="22" rx="4"/>
+    <rect x="560" y="30" width="20" height="503"/>
+    <rect x="380" y="270" width="14" height="70" rx="4" opacity="0.9"/>
+  </g>
+  <g opacity="0.1" fill="#dfe8f5">
+    <path d="M120 60 L220 60 L120 240 z"/>
+    <path d="M250 60 L290 60 L150 380 L120 380 z"/>
+  </g>
+  <rect width="800" height="533" fill="url(#vig)"/>
+  <rect width="800" height="533" filter="url(#grain)" opacity="0.13"/>
+</svg>
