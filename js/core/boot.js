@@ -273,7 +273,11 @@
         if (i < lines.length) {
           out.textContent += (i ? '\n' : '') + lines[i++];
           setTimeout(step, 420);
-        } else setTimeout(res, 620);
+        } else setTimeout(function () {
+          b.style.transition = 'opacity .5s';
+          b.style.opacity = '0';
+          setTimeout(function () { b.classList.add('hidden'); b.style.opacity = ''; res(); }, 480);
+        }, 620);
       })();
     });
   }
