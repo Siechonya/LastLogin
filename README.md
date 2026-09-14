@@ -110,10 +110,13 @@ tools/smoke.js             file:// 协议冒烟测试
 ## 开发者命令
 
 ```bash
-node tools/validate.js      # 内容一致性验证（约 200 项检查，失败退出码 1）
+node tools/validate.js      # 内容一致性验证（158 项检查，失败退出码 1）
 node tools/serve.js &       # 启动本地服务器
-node tools/playthrough.js   # 自动化通关 + 渲染扫描（需本机 Chrome/Edge 与 tools 下 npm i）
+node tools/playthrough.js   # 自动化通关 + 364 条目渲染扫描（需本机 Chrome/Edge 与 tools 下 npm i）
 node tools/smoke.js --file  # file:// 协议下的冒烟测试
+bash tools/check-all.sh     # 一键：验证 → http 通关 → file:// 冒烟
+node tools/wordcount.js     # 内容体量统计（约 2.9 万汉字 / 387 条目）
+node tools/svgshot.js       # 把 25 个 SVG 资产渲染成预览图供目检
 ```
 
 `tools/` 下的测试依赖 `puppeteer-core`（已在 `tools/package.json`，`cd tools && npm i` 安装），
