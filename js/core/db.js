@@ -13,9 +13,9 @@
   DB.intro = LL.intro || { cards: [] };
   DB.ending = LL.ending || { epilogue: [], ranks: {} };
 
-  DB.files = (LL.filesWork || []).concat(LL.filesMissing || []);
-  DB.emails = LL.emails || [];
-  DB.chats = LL.chats || [];
+  DB.files = (LL.filesWork || []).concat(LL.filesWork2 || []).concat(LL.filesMissing || []);
+  DB.emails = (LL.emails || []).concat(LL.emails2 || []);
+  DB.chats = (LL.chatsA || []).concat(LL.chatsB || []).concat(LL.chatsC || []).concat(LL.chatsD || []).concat(LL.chats || []);
   DB.photos = LL.photos || [];
   DB.browser = LL.browser || { pages: [], history: [], bookmarks: [] };
   DB.calendar = LL.calendar || [];

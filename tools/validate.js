@@ -8,7 +8,7 @@ const path = require('path');
 const vm = require('vm');
 
 const ROOT = path.join(__dirname, '..');
-const DATA_FILES = ['00_meta.js', '11_files_work.js', '13_files_missing.js', '20_emails.js', '30_chats.js', '40_photos.js', '50_browser.js', '60_misc.js'];
+const DATA_FILES = ['00_meta.js', '11_files_work.js', '12_files_work2.js', '13_files_missing.js', '20_emails.js', '21_emails2.js', '30_chats_a.js', '30_chats_b.js', '30_chats_c.js', '30_chats_d.js', '40_photos.js', '50_browser.js', '60_misc.js'];
 
 let pass = 0, fail = 0, warn = 0;
 const failures = [], warnings = [];
